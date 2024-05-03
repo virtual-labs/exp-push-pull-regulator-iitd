@@ -59,10 +59,10 @@
       "question": "4. The inductor ripple current expression is",
       "answers": {
         
-        "a": "<img src='images/postq1.png' height='30px'><br>",
-        "b": "<img src='images/postq2.png' height='30px'><br>",
-        "c": "<img src='images/postq3.png' height='30px'><br>",
-        "d": "<img src='images/postq4.png' height='30px'><br>"
+        "a": "<img src='images/postq1.png' height='55px'><br>",
+        "b": "<img src='images/postq2.png' height='55px'><br>",
+        "c": "<img src='images/postq3.png' height='55px'><br>",
+        "d": "<img src='images/postq4.png' height='55px'><br>"
       },
       "explanations": {
         "a": "Explanation 1  <a href='www.google.com'>here</a>",

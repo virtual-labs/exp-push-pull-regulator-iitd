@@ -2,12 +2,31 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "<center>Refer Fig. 1 to answer the following questions.<br> <img src='images/pre1.png' height='300px'><br><br>Fig. 1. Circuit configuration of push-pull converter.</center><br><br> 1. The feasible range of duty ratio for the switches (Q<sub>1</sub> and Q<sub>2</sub>) is:",
+      "answers": {  
+        "a": "(0-10) %",
+        "b": "(0-80) %",
+        "c": "(0-48) %",
+        "d": "(0-100) %"
+      },
+      "explanations": {
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+      
+    {
+
+      "question": "2. The frequency of the inductor current compared to the frequency of switches is?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Double",
+        "b": "Half",
+        "c": "Equal",
+        "d": "Thrice"
       },
       "explanations": {
         "a": "Explanation 1  <a href='www.google.com'>here</a>",
@@ -18,13 +37,14 @@
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
+    
     {
-      "question": "This is a Sample Question 2?",
+      "question": "3. The purpose of transformer in push-pull converter is?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Voltage ratio transformation and electrical isolation",
+        "b": "Electrical isolation and impedance matching",
+        "c": "Energy storage only",
+        "d": "Inverting the output voltage polarity"
       },
       "explanations": {
         "a": "Explanation 1  <a href='www.google.com'>here</a>",
@@ -32,7 +52,43 @@
         "c": "Explanation 2",
         "d": "Explanation 2"
       },
-      "correctAnswer": "c",
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+        
+    {
+    "question": "4. The output voltage expression of a push-pull converter is:",
+      "answers": {
+        "a": "V<sub>O</sub> = n(1-D)V<sub>G</sub>",
+        "b": "V<sub>O</sub> = DV<sub>G</sub>",
+        "c": "V<sub>O</sub> = V<sub>G</sub>/D",
+        "d": "V<sub>O</sub> = nDV<sub>G</sub>"
+      },
+      "explanations": {
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    
+    {
+      "question": "5. The gating scheme of the two switches (Q<sub>1</sub> and Q<sub>2</sub>) is:",
+      "answers": {
+        "a": "Synchronized PWM signals",
+        "b": "180&#176; phase shifted PWM signals with sufficient dead time",
+        "c": "Complementary PWM signals",
+        "d": "Synchronized PWM signals with sufficient dead time"
+      },
+      "explanations": {
+        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "b": "Explanation 2",
+        "c": "Explanation 2",
+        "d": "Explanation 2"
+      },
+      "correctAnswer": "b",
       "difficulty": "beginner"
     }
   ]

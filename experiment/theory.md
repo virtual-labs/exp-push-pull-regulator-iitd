@@ -112,3 +112,71 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
   <br>
       </div>
 <br>
+
+**2. Average current through the inductor:**
+
+<br>
+Current through capacitor C:
+<br><br>
+Since the frequency of both the inductor and capacitor currents is ‘TS/2’, only Mode-I and Mode-II is considered.
+<br><br>
+
+**Mode – I :**
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th9.png" height="25px">
+</div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(5)
+</div>
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  &nbsp;
+<br></div>
+
+**Mode – II :**
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th10.png" height="25px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(6)
+      </div>     
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  Applying ‘Charge-sec’ balance to the capacitor (eqn. 5 and 6)
+<br></div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th11.png" height="25px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(7)
+
+</div>
+
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  Solving eqn. 7 gives,
+<br></div>
+
+
+<div style="float: left; width:50%;">
+  <img src="images/th12.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;" height="60px">
+    ..(8)
+  <br>
+      </div>
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  Therefore, average inductor current is equal to load current.
+<br></div>

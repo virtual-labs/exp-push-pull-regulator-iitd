@@ -311,3 +311,92 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
 </center>
 <br>
 
+
+<center>
+<table align="center" width="100%" >
+  <tr style="text-align: center; font-weight: bold; background-color: #c9c9c9;">
+    <td style="text-align: center; font-weight: bold;">&nbsp;</td>
+    <td style="text-align: center; font-weight: bold;" colspan="2">
+      Mode-I<br>(DT<sub>s</sub>/2)
+    </td>
+    <td style="text-align: center; font-weight: bold;" colspan="2">
+      Mode-II<br>(1-D)T<sub>s</sub>
+    </td>
+    <td style="text-align: center; font-weight: bold;" colspan="2">
+      Mode-III<br>(DT<sub>s</sub>/2)
+    </td>
+    <td style="text-align: center; font-weight: bold;">Average Current</td>
+  </tr>
+  <tr style="background-color: #c9c9c9;">
+    <td></td>
+    <td>i<sub>min</sub></td>
+    <td>i<sub>max</sub></td>
+    <td>i<sub>min</sub></td>
+    <td>i<sub>max</sub></td>
+    <td>i<sub>min</sub></td>
+    <td>i<sub>max</sub></td>
+    <td>I<sub>avg</sub></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>i<sub>L</sub></td>
+    <td><img src="images/th20.png" height="60px"></td>
+    <td><img src="images/th21.png" height="60px"></td>
+    <td><img src="images/th20.png" height="60px"></td>
+    <td><img src="images/th21.png" height="60px"></td>
+    <td><img src="images/th20.png" height="60px"></td>
+    <td><img src="images/th21.png" height="60px"></td>
+    <td><img src="images/th22.png" height="35px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>i<sub>C</sub></td>
+    <td><img src="images/th23.png" height="60px"></td>
+    <td><img src="images/th24.png" height="60px"></td>
+    <td><img src="images/th23.png" height="60px"></td>
+    <td><img src="images/th24.png" height="60px"></td>
+    <td><img src="images/th23.png" height="60px"></td>
+    <td><img src="images/th24.png" height="60px"></td>
+    <td>&#48;</td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>i<sub>Q1</sub></td>
+    <td><img src="images/th25.png" height="60px"></td>
+    <td><img src="images/th26.png" height="60px"></td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td><img src="images/th27.png" height="60px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>i<sub>Q2</sub></td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td><img src="images/th28.png" height="60px"></td>
+    <td><img src="images/th29.png" height="60px"></td>
+    <td><img src="images/th30.png" height="30px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>i<sub>Di1</sub></td>
+    <td><img src="images/th31.png" height="60px"></td>
+    <td><img src="images/th32.png" height="60px"></td>
+    <td><img src="images/th36.png" height="60px"></td>
+    <td><img src="images/th37.png" height="60px"></td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td><img src="images/th38.png" height="60px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>i<sub>Di2</sub></td>
+    <td>&#x30;</td>
+    <td>&#x30;</td>
+    <td><img src="images/th39.png" height="60px"></td>
+    <td><img src="images/th40.png" height="60px"></td>
+    <td><img src="images/th41.png" height="60px"></td>
+    <td><img src="images/th42.png" height="60px"></td>
+    <td><img src="images/th43.png" height="60px"></td>
+  </tr>
+</table>
+</center>
+<br>

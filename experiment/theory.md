@@ -444,3 +444,82 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
 </table>
 
 </center>
+<br>
+<br>
+
+<div style="float: left; width:100%;"><br>
+
+**7. Efficiency analysis:**     
+
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th52.png" height="70px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(15)
+      </div>
+
+<div style="float: left; width:100%;">
+<br><br>    
+</div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th53.png" height="80px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(16)
+      </div>
+
+<div style="float: left; width:100%;"><br><br>
+     
+Power losses occurring in various components are given below:<br><br>
+Power loss in inductor:
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th54.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(17)
+      </div>
+<br><br>
+
+<div style="float: left; width:100%;">
+  
+Power loss in capacitor:    
+</div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th55.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(18)
+      </div>
+
+<div style="float: left; width:100%;"><br>
+
+Power loss in switches:
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th56.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(19)
+      </div>
+<br><br>
+<div style="float: left; width:100%;"><br>
+&nbsp;
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th57.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(20)
+      </div>

@@ -523,3 +523,126 @@ Power loss in switches:
 <div style="float: right; width:50%; text-align:center;">
     ..(20)
       </div>
+
+<br>
+
+<div style="float: left; width:100%;"><br>
+
+Power loss in diodes:
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th58.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(21)
+      </div>
+<br><br>
+<div style="float: left; width:100%;"><br>
+&nbsp;
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th59.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(22)
+      </div>
+
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+     
+Total power loss:
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th60.png" height="60px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(23)
+      </div>
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+
+**8. Effect of non-idealities on voltage gain expression:**     
+
+</div>
+
+<br><br>
+Power losses occurring in various components are given below:
+<br>
+
+<center>
+  <img src="images/th61.png" height="350px">
+  
+Fig. 4. Circuit Diagram of Push-pull Converter with non-idealities.
+
+</center>
+<br>
+
+
+<br><br>
+
+<div style="float: left; width:100%;"><br><br>
+
+Voltage across inductor L<br>
+
+<br>
+Since the frequency of inductor voltage is TS/2, only Mode-I and Mode-II or Mode-III and Mode-IV will be taken:
+<br>
+
+**Mode – I :**
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th62.png" height="45px"><br>
+</div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(24)
+</div>
+<br><br>
+<div style="float: left; width:100%;">
+     
+**Mode – II :**
+</div>
+
+<br>
+<div style="float: left; width:50%;">
+  <img src="images/th63.png" height="45px"><br>
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(25)
+      </div>     
+
+
+<div style="float: left; width:100%;"><br><br>
+  
+Applying Volt-sec balance across the inductor (eqn. 24 and 25), <br><br>  
+</div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th64.png" height="45px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(26)
+      </div>
+
+<div style="float: left; width:100%;"><br>
+     
+Substituting,<img src="images/th65.png" height="45px"> and solving the above equation gives,
+</div>
+
+
+<div style="float: left; width:50%;"><br>
+  <img src="images/th66.png" height="75px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(27)
+      </div>
+<br><br>

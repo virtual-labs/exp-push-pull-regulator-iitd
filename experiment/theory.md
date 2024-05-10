@@ -483,7 +483,7 @@ Power loss in inductor:
 
 <br>
 <div style="float: left; width:50%;">
-  <img src="images/th54.png" height="60px">
+  <img src="images/th54.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(17)
@@ -496,7 +496,7 @@ Power loss in capacitor:
 </div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th55.png" height="60px">
+  <img src="images/th55.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(18)
@@ -509,7 +509,7 @@ Power loss in switches:
 
 <br>
 <div style="float: left; width:50%;">
-  <img src="images/th56.png" height="60px">
+  <img src="images/th56.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(19)
@@ -521,7 +521,7 @@ Power loss in switches:
 
 <br>
 <div style="float: left; width:50%;">
-  <img src="images/th57.png" height="60px">
+  <img src="images/th57.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(20)
@@ -536,7 +536,7 @@ Power loss in diodes:
 
 <br>
 <div style="float: left; width:50%;">
-  <img src="images/th58.png" height="60px">
+  <img src="images/th58.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(21)
@@ -548,7 +548,7 @@ Power loss in diodes:
 
 <br>
 <div style="float: left; width:50%;">
-  <img src="images/th59.png" height="60px">
+  <img src="images/th59.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(22)
@@ -563,7 +563,7 @@ Total power loss:
 
 <br>
 <div style="float: left; width:50%;">
-  <img src="images/th60.png" height="60px">
+  <img src="images/th60.png" height="55px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(23)
@@ -581,16 +581,13 @@ Power losses occurring in various components are given below:
 <br>
 
 <center>
-  <img src="images/th61.png" height="350px">
+  <img src="images/th61.png" height="300px">
   
 Fig. 4. Circuit Diagram of Push-pull Converter with non-idealities.
 
 </center>
-<br>
-
 
 <br><br>
-
 <div style="float: left; width:100%;"><br><br>
 
 Voltage across inductor L<br>
@@ -609,6 +606,7 @@ Since the frequency of inductor voltage is TS/2, only Mode-I and Mode-II or Mode
 <div style="float: right; width:50%; text-align:center;">
     ..(24)
 </div>
+
 <br><br>
 <div style="float: left; width:100%;">
      
@@ -630,7 +628,7 @@ Applying Volt-sec balance across the inductor (eqn. 24 and 25), <br><br>
 </div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th64.png" height="45px">
+  <img src="images/th64.png" height="40px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(26)
@@ -638,12 +636,12 @@ Applying Volt-sec balance across the inductor (eqn. 24 and 25), <br><br>
 
 <div style="float: left; width:100%;"><br>
      
-Substituting,<img src="images/th65.png" height="45px"> and solving the above equation gives,
+Substituting,<img src="images/th65.png" height="50px"> and solving the above equation gives,
 </div>
 
 
 <div style="float: left; width:50%;"><br>
-  <img src="images/th66.png" height="75px">
+  <img src="images/th66.png" height="150px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(27)

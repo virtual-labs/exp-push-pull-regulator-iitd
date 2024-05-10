@@ -307,7 +307,7 @@ The current through various components can easily be identified from Fig. 3.
 <br>
 
 <center>
-  <img src="images/th19.png">
+  <img src="images/th19.png" style="height: 1000px;">
   
 Fig. 3. Circuit Diagram of Push-pull Converter.
 
@@ -351,54 +351,54 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
     <td><img src="images/th22.png" height="45px"></td>
   </tr>
   <tr style="background-color: #FFF;">
-    <td>i<sub>C</sub></td>
-    <td><img src="images/th23.png" height="70px"></td>
-    <td><img src="images/th24.png" height="70px"></td>
-    <td><img src="images/th23.png" height="70px"></td>
-    <td><img src="images/th24.png" height="70px"></td>
-    <td><img src="images/th23.png" height="70px"></td>
-    <td><img src="images/th24.png" height="70px"></td>
+    <td style="text-align: center; font-weight: bold;">i<sub>C</sub></td>
+    <td><img src="images/th23.png" height="60px"></td>
+    <td><img src="images/th24.png" height="60px"></td>
+    <td><img src="images/th23.png" height="60px"></td>
+    <td><img src="images/th24.png" height="60px"></td>
+    <td><img src="images/th23.png" height="60px"></td>
+    <td><img src="images/th24.png" height="60px"></td>
     <td>&#48;</td>
   </tr>
   <tr style="background-color: #FFF;">
-    <td>i<sub>Q1</sub></td>
-    <td><img src="images/th25.png" height="70px"></td>
-    <td><img src="images/th26.png" height="70px"></td>
+    <td style="text-align: center; font-weight: bold;">i<sub>Q1</sub></td>
+    <td><img src="images/th25.png" height="60px"></td>
+    <td><img src="images/th26.png" height="60px"></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th27.png" height="70px"></td>
+    <td><img src="images/th27.png" height="45px"></td>
   </tr>
   <tr style="background-color: #FFF;">
-    <td>i<sub>Q2</sub></td>
+    <td style="text-align: center; font-weight: bold;">i<sub>Q2</sub></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th28.png" height="70px"></td>
-    <td><img src="images/th29.png" height="70px"></td>
-    <td><img src="images/th30.png" height="40px"></td>
+    <td><img src="images/th28.png" height="60px"></td>
+    <td><img src="images/th29.png" height="60px"></td>
+    <td><img src="images/th30.png" height="45px"></td>
   </tr>
   <tr style="background-color: #FFF;">
-    <td>i<sub>Di1</sub></td>
-    <td><img src="images/th31.png" height="70px"></td>
-    <td><img src="images/th32.png" height="70px"></td>
-    <td><img src="images/th36.png" height="70px"></td>
-    <td><img src="images/th37.png" height="70px"></td>
+    <td style="text-align: center; font-weight: bold;">i<sub>Di1</sub></td>
+    <td><img src="images/th31.png" height="60px"></td>
+    <td><img src="images/th32.png" height="60px"></td>
+    <td><img src="images/th36.png" height="60px"></td>
+    <td><img src="images/th37.png" height="60px"></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th38.png" height="70px"></td>
+    <td><img src="images/th38.png" height="65px"></td>
   </tr>
   <tr style="background-color: #FFF;">
-    <td>i<sub>Di2</sub></td>
+    <td style="text-align: center; font-weight: bold;">i<sub>Di2</sub></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th39.png" height="70px"></td>
-    <td><img src="images/th40.png" height="70px"></td>
-    <td><img src="images/th41.png" height="70px"></td>
-    <td><img src="images/th42.png" height="70px"></td>
-    <td><img src="images/th43.png" height="70px"></td>
+    <td><img src="images/th39.png" height="60px"></td>
+    <td><img src="images/th40.png" height="60px"></td>
+    <td><img src="images/th41.png" height="60px"></td>
+    <td><img src="images/th42.png" height="60px"></td>
+    <td><img src="images/th43.png" height="60px"></td>
   </tr>
 </table>
 </center>
@@ -426,23 +426,23 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
   </tr>
   <tr style="background-color: #FFF;">
     <td>Inductor (L)</td>
-    <td><img src="images/th44.png" height="60px"></td>
-    <td><img src="images/th45.png" height="60px"></td>
+    <td><img src="images/th44.png" height="70px"></td>
+    <td><img src="images/th45.png" height="70px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>Capacitor (C)</td>
-    <td><img src="images/th46.png" height="60px"></td>
-    <td><img src="images/th47.png" height="60px"></td>
+    <td><img src="images/th46.png" height="45px"></td>
+    <td><img src="images/th47.png" height="70px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>Switches (Q<sub>1</sub>, Q<sub>2</sub>)</td>
-    <td><img src="images/th48.png" height="60px"></td>
-    <td><img src="images/th49.png" height="60px"></td>
+    <td><img src="images/th48.png" height="45px"></td>
+    <td><img src="images/th49.png" height="70px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>Diodes (D<sub>i1</sub>, D<sub>i2</sub>)</td>
-    <td><img src="images/th50.png" height="60px"></td>
-    <td><img src="images/th51.png" height="60px"></td>
+    <td><img src="images/th50.png" height="45px"></td>
+    <td><img src="images/th51.png" height="70px"></td>
   </tr>
 </table>
 

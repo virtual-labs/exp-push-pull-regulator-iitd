@@ -50,16 +50,21 @@ Fig. 2(c). Circuit in mode-III (Q1- OFF, Q2- ON).
 </table>
 <br><br>
 
-
-**1. Voltage conversion ratio or voltage gain (M)**
-
+<div style="float: left; width:100%;"><br>
+  
+  **1. Voltage conversion ratio or voltage gain (M)**
+<br>
 Voltage across inductor L:
+<br>
+
 <br><br>
 Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and Mode-II or Mode-III and Mode-IV is sufficient to formulate the voltage gain:
 <br><br>
 
 **Mode – I :**
 <br>
+</div>
+
 <div style="float: left; width:50%;">
   <img src="images/th5.png" height="25px">
 </div>
@@ -113,13 +118,20 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
       </div>
 <br>
 
-**2. Average current through the inductor:**
-
+<div style="float: left; width:100%;"><br>
+  
+  **2. Average current through the inductor:**
 <br>
 Current through capacitor C:
+<br>
+
 <br><br>
 Since the frequency of both the inductor and capacitor currents is ‘TS/2’, only Mode-I and Mode-II is considered.
 <br><br>
+
+**Mode – I :**
+<br>
+</div>
 
 **Mode – I :**
 <br>
@@ -180,3 +192,49 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
   
   Therefore, average inductor current is equal to load current.
 <br></div>
+
+<br>
+
+**3. Power balance under ideal condition (neglecting losses in the converter):**
+
+<br><br>
+In ideal conditions, the input power is equal to the output power. Hence,
+<br><br>
+
+<div style="float: left; width:50%;">
+  <img src="images/th13.png" height="25px">
+</div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(9)
+</div>
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  &nbsp;
+<br></div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th14.png" height="25px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(10)
+      </div>     
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  Substituting eqn. 4 in 10,
+<br></div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th15.png" height="25px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(11)
+
+</div>
+
+<br><br>
+
+<br>

@@ -242,3 +242,72 @@ In ideal conditions, the input power is equal to the output power. Hence,
 <br><br>
 
 <br>
+
+
+<div style="float: left; width:100%;"><br>
+  
+  **4. Inductor current ripple:**
+<br><br>
+From eqn. 1,
+<br><br>
+
+</div>
+
+<br>
+
+<div style="float: left; width:50%;">
+  <img src="images/th16.png" height="25px">
+</div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(12)
+</div>
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  &nbsp;
+<br></div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th17.png" height="25px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(13)
+      </div>     
+<br><br>
+
+<div style="float: left; width:100%;"><br>
+  
+  Therefore, the inductor ripple current is,
+<br></div>
+
+<div style="float: left; width:50%;">
+  <img src="images/th18.png" height="25px">
+      </div>
+<div style="float: right; width:50%; text-align:center;">
+    ..(14)
+
+</div>
+
+<br><br>
+
+
+<div style="float: left; width:100%;"><br>
+  
+  **5. Current through various components:**
+<br><br>
+The current through various components can easily be identified from Fig. 3.
+<br><br>
+
+</div>
+
+<br>
+
+<center>
+  <img src="images/th19.png">
+  
+Fig. 3. Circuit Diagram of Push-pull Converter.
+
+</center>
+<br>
+

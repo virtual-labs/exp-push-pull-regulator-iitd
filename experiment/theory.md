@@ -125,7 +125,6 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
   **2. Average current through the inductor:**
 <br>
 Current through capacitor C:
-<br>
 
 <br><br>
 Since the frequency of both the inductor and capacitor currents is ‘TS/2’, only Mode-I and Mode-II is considered.
@@ -136,7 +135,7 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
 </div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th9.png" height="25px">
+  <img src="images/th9.png" height="40px">
 </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(5)
@@ -146,12 +145,14 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
 <div style="float: left; width:100%;"><br>
   
   &nbsp;
-<br></div>
+<br>
 
 **Mode – II :**
 <br>
+</div>
+
 <div style="float: left; width:50%;">
-  <img src="images/th10.png" height="25px">
+  <img src="images/th10.png" height="45px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(6)
@@ -164,7 +165,7 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
 <br></div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th11.png" height="25px">
+  <img src="images/th11.png" height="45px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(7)
@@ -180,7 +181,7 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
 
 
 <div style="float: left; width:50%;">
-  <img src="images/th12.png" height="60px">
+  <img src="images/th12.png" height="50px">
       </div>
 <div style="float: right; width:50%; text-align:center;" height="60px">
     ..(8)
@@ -208,7 +209,7 @@ In ideal conditions, the input power is equal to the output power. Hence,
 
 
 <div style="float: left; width:50%;">
-  <img src="images/th13.png" height="25px">
+  <img src="images/th13.png" height="45px">
 </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(9)
@@ -221,7 +222,7 @@ In ideal conditions, the input power is equal to the output power. Hence,
 <br></div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th14.png" height="25px">
+  <img src="images/th14.png" height="45px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(10)
@@ -234,7 +235,7 @@ In ideal conditions, the input power is equal to the output power. Hence,
 <br></div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th15.png" height="25px">
+  <img src="images/th15.png" height="45px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(11)
@@ -258,7 +259,7 @@ From eqn. 1,
 <br>
 
 <div style="float: left; width:50%;">
-  <img src="images/th16.png" height="25px">
+  <img src="images/th16.png" height="75px">
 </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(12)
@@ -271,7 +272,7 @@ From eqn. 1,
 <br></div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th17.png" height="25px">
+  <img src="images/th17.png" height="75px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(13)
@@ -284,7 +285,7 @@ From eqn. 1,
 <br></div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th18.png" height="25px">
+  <img src="images/th18.png" height="75px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(14)
@@ -329,7 +330,7 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
     </td>
     <td style="text-align: center; font-weight: bold;">Average Current</td>
   </tr>
-  <tr style="background-color: #c9c9c9;">
+  <tr style="background-color: #c9c9c9; text-align: center; font-weight: bold;">
     <td></td>
     <td>i<sub>min</sub></td>
     <td>i<sub>max</sub></td>
@@ -340,34 +341,34 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
     <td>I<sub>avg</sub></td>
   </tr>
   <tr style="background-color: #FFF;">
-    <td>i<sub>L</sub></td>
-    <td><img src="images/th20.png" height="60px"></td>
-    <td><img src="images/th21.png" height="60px"></td>
-    <td><img src="images/th20.png" height="60px"></td>
-    <td><img src="images/th21.png" height="60px"></td>
-    <td><img src="images/th20.png" height="60px"></td>
-    <td><img src="images/th21.png" height="60px"></td>
-    <td><img src="images/th22.png" height="35px"></td>
+    <td style="text-align: center; font-weight: bold;">i<sub>L</sub></td>
+    <td><img src="images/th20.png" height="70px"></td>
+    <td><img src="images/th21.png" height="70px"></td>
+    <td><img src="images/th20.png" height="70px"></td>
+    <td><img src="images/th21.png" height="70px"></td>
+    <td><img src="images/th20.png" height="70px"></td>
+    <td><img src="images/th21.png" height="70px"></td>
+    <td><img src="images/th22.png" height="45px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>i<sub>C</sub></td>
-    <td><img src="images/th23.png" height="60px"></td>
-    <td><img src="images/th24.png" height="60px"></td>
-    <td><img src="images/th23.png" height="60px"></td>
-    <td><img src="images/th24.png" height="60px"></td>
-    <td><img src="images/th23.png" height="60px"></td>
-    <td><img src="images/th24.png" height="60px"></td>
+    <td><img src="images/th23.png" height="70px"></td>
+    <td><img src="images/th24.png" height="70px"></td>
+    <td><img src="images/th23.png" height="70px"></td>
+    <td><img src="images/th24.png" height="70px"></td>
+    <td><img src="images/th23.png" height="70px"></td>
+    <td><img src="images/th24.png" height="70px"></td>
     <td>&#48;</td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>i<sub>Q1</sub></td>
-    <td><img src="images/th25.png" height="60px"></td>
-    <td><img src="images/th26.png" height="60px"></td>
+    <td><img src="images/th25.png" height="70px"></td>
+    <td><img src="images/th26.png" height="70px"></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th27.png" height="60px"></td>
+    <td><img src="images/th27.png" height="70px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>i<sub>Q2</sub></td>
@@ -375,29 +376,29 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
     <td>&#x30;</td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th28.png" height="60px"></td>
-    <td><img src="images/th29.png" height="60px"></td>
-    <td><img src="images/th30.png" height="30px"></td>
+    <td><img src="images/th28.png" height="70px"></td>
+    <td><img src="images/th29.png" height="70px"></td>
+    <td><img src="images/th30.png" height="40px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>i<sub>Di1</sub></td>
-    <td><img src="images/th31.png" height="60px"></td>
-    <td><img src="images/th32.png" height="60px"></td>
-    <td><img src="images/th36.png" height="60px"></td>
-    <td><img src="images/th37.png" height="60px"></td>
+    <td><img src="images/th31.png" height="70px"></td>
+    <td><img src="images/th32.png" height="70px"></td>
+    <td><img src="images/th36.png" height="70px"></td>
+    <td><img src="images/th37.png" height="70px"></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th38.png" height="60px"></td>
+    <td><img src="images/th38.png" height="70px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td>i<sub>Di2</sub></td>
     <td>&#x30;</td>
     <td>&#x30;</td>
-    <td><img src="images/th39.png" height="60px"></td>
-    <td><img src="images/th40.png" height="60px"></td>
-    <td><img src="images/th41.png" height="60px"></td>
-    <td><img src="images/th42.png" height="60px"></td>
-    <td><img src="images/th43.png" height="60px"></td>
+    <td><img src="images/th39.png" height="70px"></td>
+    <td><img src="images/th40.png" height="70px"></td>
+    <td><img src="images/th41.png" height="70px"></td>
+    <td><img src="images/th42.png" height="70px"></td>
+    <td><img src="images/th43.png" height="70px"></td>
   </tr>
 </table>
 </center>

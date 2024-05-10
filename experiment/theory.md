@@ -400,3 +400,47 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
 </table>
 </center>
 <br>
+
+
+<div style="float: left; width:100%;"><br>
+
+**6. Voltage and current stress on various components:**
+
+</div>
+<br>
+<center>    
+<table align="center" style="width: 100%;">
+  <tr style="text-align: center; font-weight: bold; background-color: #c9c9c9;">
+    <td style="text-align: center; font-weight: bold;">
+      &nbsp;
+    </td>
+    <td style="text-align: center; font-weight: bold;">
+      Voltage stress
+    </td>
+    <td style="text-align: center; font-weight: bold;">
+      Current Stress
+    </td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>Inductor (L)</td>
+    <td><img src="images/th44.png" height="60px"></td>
+    <td><img src="images/th45.png" height="60px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>Capacitor (C)</td>
+    <td><img src="images/th46.png" height="60px"></td>
+    <td><img src="images/th47.png" height="60px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>Switches (Q<sub>1</sub>, Q<sub>2</sub>)</td>
+    <td><img src="images/th48.png" height="60px"></td>
+    <td><img src="images/th49.png" height="60px"></td>
+  </tr>
+  <tr style="background-color: #FFF;">
+    <td>Diodes (D<sub>i1</sub>, D<sub>i2</sub>)</td>
+    <td><img src="images/th50.png" height="60px"></td>
+    <td><img src="images/th51.png" height="60px"></td>
+  </tr>
+</table>
+
+</center>

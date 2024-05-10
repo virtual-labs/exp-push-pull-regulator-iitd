@@ -40,7 +40,7 @@ Fig. 2(b). Circuit in mode-II, IV (Q1- OFF, Q2- OFF).
   <td colspan="2">
     <center>
 
-<img src="images/th4.png" height="250px">
+<img src="images/th4.png" height="290px">
 <br><br>
 Fig. 2(c). Circuit in mode-III (Q1- OFF, Q2- ON).
 <br><br>
@@ -66,7 +66,7 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
 </div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th5.png" height="25px">
+  <img src="images/th5.png" height="45px">
 </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(1)
@@ -76,12 +76,14 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
 <div style="float: left; width:100%;"><br>
   
   where n=Ns/Np.
-<br></div>
+<br>
 
 **Mode – II :**
 <br>
+</div>
+
 <div style="float: left; width:50%;">
-  <img src="images/th6.png" height="25px">
+  <img src="images/th6.png" height="45px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(2)
@@ -94,7 +96,7 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
 <br></div>
 
 <div style="float: left; width:50%;">
-  <img src="images/th7.png" height="25px">
+  <img src="images/th7.png" height="45px">
       </div>
 <div style="float: right; width:50%; text-align:center;">
     ..(3)
@@ -110,7 +112,7 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
 
 
 <div style="float: left; width:50%;">
-  <img src="images/th8.png" height="60px">
+  <img src="images/th8.png" height="65px">
       </div>
 <div style="float: right; width:50%; text-align:center;" height="60px">
     ..(4)

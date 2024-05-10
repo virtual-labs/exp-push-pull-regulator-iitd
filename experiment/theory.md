@@ -133,8 +133,6 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
 <br>
 </div>
 
-**Mode – I :**
-<br>
 <div style="float: left; width:50%;">
   <img src="images/th9.png" height="25px">
 </div>
@@ -192,14 +190,20 @@ Since the frequency of both the inductor and capacitor currents is ‘TS/2’, o
   
   Therefore, average inductor current is equal to load current.
 <br></div>
-
 <br>
 
-**3. Power balance under ideal condition (neglecting losses in the converter):**
+<div style="float: left; width:100%;"><br>
+  
+  **3. Power balance under ideal condition (neglecting losses in the converter):**
 
 <br><br>
 In ideal conditions, the input power is equal to the output power. Hence,
 <br><br>
+
+</div>
+
+<br>
+
 
 <div style="float: left; width:50%;">
   <img src="images/th13.png" height="25px">

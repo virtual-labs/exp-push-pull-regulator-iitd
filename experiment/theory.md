@@ -9,7 +9,7 @@ Fig. 1. Circuit Diagram of Push-pull Converter.
 
 </center>
 <br>
-The switches (Q1 and Q2: ON/OFF-state) are turned-ON/OFF using 180o phase shifted PWM signals. The converter operation can easily be understood from the following equivalent circuits. Brief mathematical analysis is given below.
+The switches (Q<sub>1</sub> and Q<sub>2</sub>: ON/OFF-state) are turned-ON/OFF using 180&#176; phase shifted PWM signals. The converter operation can easily be understood from the following equivalent circuits. Brief mathematical analysis is given below.
 <br><br>
 
 
@@ -20,7 +20,7 @@ The switches (Q1 and Q2: ON/OFF-state) are turned-ON/OFF using 180o phase shifte
 
 <img src="images/th2.png">
 <br><br>
-Fig. 2(a). Circuit in mode-I (Q1- ON, Q2- OFF).
+Fig. 2(a). Circuit in mode-I (Q<sub>1</sub>- ON, Q<sub>2</sub>- OFF).
 <br><br>
 </center>
 </td>
@@ -30,7 +30,7 @@ Fig. 2(a). Circuit in mode-I (Q1- ON, Q2- OFF).
 
 <img src="images/th3.png">
 <br><br>
-Fig. 2(b). Circuit in mode-II, IV (Q1- OFF, Q2- OFF).
+Fig. 2(b). Circuit in mode-II, IV (Q<sub>1</sub>- OFF, Q<sub>2</sub>- OFF).
 <br><br>
 </center> 
     </td>
@@ -42,7 +42,7 @@ Fig. 2(b). Circuit in mode-II, IV (Q1- OFF, Q2- OFF).
 
 <img src="images/th4.png" height="290px">
 <br><br>
-Fig. 2(c). Circuit in mode-III (Q1- OFF, Q2- ON).
+Fig. 2(c). Circuit in mode-III (Q<sub>1</sub>- OFF, Q<sub>2</sub>- ON).
 <br><br>
 </center>
   </td>
@@ -58,7 +58,7 @@ Voltage across inductor L:
 <br>
 
 <br><br>
-Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and Mode-II or Mode-III and Mode-IV is sufficient to formulate the voltage gain:
+Since the frequency of inductor current/voltage is ‘T<sub>S</sub>/2’, only Mode-I and Mode-II or Mode-III and Mode-IV is sufficient to formulate the voltage gain:
 <br><br>
 
 **Mode – I :**
@@ -75,7 +75,7 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
 
 <div style="float: left; width:100%;"><br>
   
-  where n=Ns/Np.
+  where n=N<sub>s</sub>/N<sub>p</sub>.
 <br>
 
 **Mode – II :**
@@ -127,7 +127,7 @@ Since the frequency of inductor current/voltage is ‘TS/2’, only Mode-I and M
 Current through capacitor C:
 
 <br><br>
-Since the frequency of both the inductor and capacitor currents is ‘TS/2’, only Mode-I and Mode-II is considered.
+Since the frequency of both the inductor and capacitor currents is ‘T<sub>S</sub>/2’, only Mode-I and Mode-II is considered.
 <br><br>
 
 **Mode – I :**
@@ -364,18 +364,18 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
     <td style="text-align: center; font-weight: bold;">i<sub>Q1</sub></td>
     <td><img src="images/th25.png" height="60px"></td>
     <td><img src="images/th26.png" height="60px"></td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
     <td><img src="images/th27.png" height="45px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td style="text-align: center; font-weight: bold;">i<sub>Q2</sub></td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
     <td><img src="images/th28.png" height="60px"></td>
     <td><img src="images/th29.png" height="60px"></td>
     <td><img src="images/th30.png" height="45px"></td>
@@ -386,14 +386,14 @@ Fig. 3. Circuit Diagram of Push-pull Converter.
     <td><img src="images/th32.png" height="60px"></td>
     <td><img src="images/th36.png" height="60px"></td>
     <td><img src="images/th37.png" height="60px"></td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
     <td><img src="images/th38.png" height="65px"></td>
   </tr>
   <tr style="background-color: #FFF;">
     <td style="text-align: center; font-weight: bold;">i<sub>Di2</sub></td>
-    <td>&#x30;</td>
-    <td>&#x30;</td>
+    <td>&#48;</td>
+    <td>&#48;</td>
     <td><img src="images/th39.png" height="60px"></td>
     <td><img src="images/th40.png" height="60px"></td>
     <td><img src="images/th41.png" height="60px"></td>
@@ -593,7 +593,7 @@ Fig. 4. Circuit Diagram of Push-pull Converter with non-idealities.
 Voltage across inductor L<br>
 
 <br>
-Since the frequency of inductor voltage is TS/2, only Mode-I and Mode-II or Mode-III and Mode-IV will be taken:
+Since the frequency of inductor voltage is T<sub>S</sub>/2, only Mode-I and Mode-II or Mode-III and Mode-IV will be taken:
 <br>
 
 **Mode – I :**

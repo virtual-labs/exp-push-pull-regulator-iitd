@@ -10,10 +10,10 @@
         "d": "V<sub>G</sub>/2"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Explanation 1",
+        "b": "Explanation 2: Applying KVL in the corresponding equivalent circuits gives the switch voltage as 2V<sub>G</sub>.",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
       },
       "correctAnswer": "b",
       "difficulty": "beginner"
@@ -28,10 +28,10 @@
         "d": "Q<sub>1</sub> -OFF, Q<sub>2</sub> – OFF, Di<sub>1</sub> – ON, Di<sub>2</sub> - ON"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3",
+        "d": "Explanation 4: From the equivalent circuit it will be easy to identify the status of the devices."
       },
       "correctAnswer": "d",
       "difficulty": "beginner"
@@ -46,10 +46,10 @@
         "d": "50 W"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3: <img src='images/expl1.png' height='60px'><br><img src='images/expl2.png' height='60px'>",
+        "d": "Explanation 4"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
@@ -65,10 +65,10 @@
         "d": "<img src='images/postq4.png' height='55px'><br>"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3: <img src='images/expl3.png' height='60px'>",
+        "d": "Explanation 4"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
@@ -83,10 +83,10 @@
         "d": "V<sub>O</sub>"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1: Applying KVL in the corresponding equivalent circuits gives the switch voltage as V<sub>G</sub>.",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3",
+        "d": "Explanation 4"
       },
       "correctAnswer": "a",
       "difficulty": "beginner"

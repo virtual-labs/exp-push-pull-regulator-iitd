@@ -1,0 +1,81 @@
+
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/formulas_component_stress.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/formulas_efficiency.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/formulas_ideal.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/formulas_nomenclautre.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/formulas_non_ideal.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/formulas_part_2.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/procedure_component_stress.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/procedure_efficiency.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/procedure_ideal.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/procedure_non_ideal.png"
+    />
+    
+     <img
+        class="main-window-imgs"
+        src="./src/images/popup_imgs/procedure_part_2.png"
+    />
+    
+
+formulas_component_stress:this.allImgsDom[index++],
+formulas_efficiency:this.allImgsDom[index++],
+formulas_ideal:this.allImgsDom[index++],
+formulas_nomenclautre:this.allImgsDom[index++],
+formulas_non_ideal:this.allImgsDom[index++],
+formulas_part_2:this.allImgsDom[index++],
+procedure_component_stress:this.allImgsDom[index++],
+procedure_efficiency:this.allImgsDom[index++],
+procedure_ideal:this.allImgsDom[index++],
+procedure_non_ideal:this.allImgsDom[index++],
+procedure_part_2:this.allImgsDom[index++],
+
+
+formulas_component_stress : new Dom("formulas_component_stress"),
+formulas_efficiency : new Dom("formulas_efficiency"),
+formulas_ideal : new Dom("formulas_ideal"),
+formulas_nomenclautre : new Dom("formulas_nomenclautre"),
+formulas_non_ideal : new Dom("formulas_non_ideal"),
+formulas_part_2 : new Dom("formulas_part_2"),
+procedure_component_stress : new Dom("procedure_component_stress"),
+procedure_efficiency : new Dom("procedure_efficiency"),
+procedure_ideal : new Dom("procedure_ideal"),
+procedure_non_ideal : new Dom("procedure_non_ideal"),
+procedure_part_2 : new Dom("procedure_part_2"),

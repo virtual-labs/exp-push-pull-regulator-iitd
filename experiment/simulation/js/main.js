@@ -261,6 +261,11 @@ function toggleNextBtn(){
   let nextBtn = document.querySelector(".btn-next")
   nextBtn.classList.toggle("btn-deactive")
 }
+const cancelSpeech = ()=>{
+  window.speechSynthesis.cancel()
+  ccQueue = []
+}
+
 const setIsProcessRunning = (value) => {
   // calling toggle the next
   if(value != isRunning){
@@ -269,6 +274,7 @@ const setIsProcessRunning = (value) => {
 
   isRunning = value;
   if(value){
+    cancelSpeech()
     Dom.hideAll()
   }
 };
@@ -314,13 +320,16 @@ let student_name = "";
 const 
 
 
-textToSpeach = (text) => {
-  // if(isMute){
-  //   return;
-  // }
+textToSpeach = (text,speak=true) => {
+  // for filter <sub></sub>
+  text = text.replaceAll("<sub>"," ").replaceAll("</sub>"," ")
   let utterance = new SpeechSynthesisUtterance();
   utterance.text = text;
   utterance.voice = window.speechSynthesis.getVoices()[0];
+  if(isMute || !speak){
+    utterance.volume = 0
+    utterance.rate = 10
+  }
   window.speechSynthesis.speak(utterance);
   return utterance;
 };
@@ -329,7 +338,7 @@ textToSpeach = (text) => {
 let ccQueue = [];
 // for subtitile
 let ccObj = null;
-function setCC(text = null, speed = 25) {
+function setCC(text = null, speed = 25, speak = true) {
   if (ccObj != null) {
     ccObj.destroy();
   }
@@ -340,16 +349,15 @@ function setCC(text = null, speed = 25) {
     strings: ["", ...ccQueue],
     typeSpeed: speed,
     onStringTyped(){
-      ccQueue.shift();
+      ccQueue.shift()
       // if(ccQueue.length != 0){
-      //   setCC(ccQueue.shift())
+      //   setCC(ccQueue.shift())`
       // }
     }
   });
-  if (!isMute) textToSpeach(text);
-  return ccDom;
+  let utterance = textToSpeach(text,speak)
+  return utterance
 }
-
 
 // * for cursor pointer
 function cursorPointer(ele) {
@@ -557,6 +565,23 @@ const Scenes = {
     procedure_popup_box : new Dom("procedure_popup_box"),
     hint_popup_box : new Dom("hint_popup_box"),
     part_2_graph_with_arrow : new Dom("part_2_graph_with_arrow"),
+    btn_hint_2 : new Dom("btn_hint_2"),
+    hint_popup_box_2 : new Dom("hint_popup_box_2"),
+
+    //! Experimental section images added
+
+    btn_1: new Dom("btn_1"),
+    btn_2: new Dom("btn_2"),
+    btn_3: new Dom("btn_3"),
+    btn_click: new Dom("btn_click"),
+    circle: new Dom("circle"),
+    frame_1: new Dom("frame_1"),
+    frame_2: new Dom("frame_2"),
+    frame_3: new Dom("frame_3"),
+    menu_page: new Dom("menu_page"),
+    val_vgs: new Dom("val_vgs"),
+    val_vin: new Dom("val_vin"),
+    val_d: new Dom("val_d"),
 
 
     //! EE9 images end here
@@ -687,13 +712,15 @@ const Scenes = {
   showPopup(step){
 
     let procedureBtn = Scenes.items.btn_procedure.zIndex(1000)
-    let hintBtn = Scenes.items.btn_hint.zIndex(1000)
+    let hintBtn1 = Scenes.items.btn_hint.zIndex(1000)
+    let hintBtn2 = Scenes.items.btn_hint_2.zIndex(1000)
 
-    let procedureImg, hintImg;
+    let procedureImg, hintImg, hintImg2;
 
     
     let btn = [
-      hintBtn,
+      hintBtn1,
+      hintBtn2,
       procedureBtn,
     ]
 
@@ -703,11 +730,16 @@ const Scenes = {
       case 1 :
         procedureImg = Scenes.items.procedure_popup_box.set(2, 134, 283).hide()
         hintImg = Scenes.items.hint_popup_box.set(502, -29, 418).hide()
+        hintImg2 = Scenes.items.hint_popup_box_2.set(9, -33+40, 440).hide()
           }
 
 
-    let showHintImg = function(){
+    let showHintImg1 = function(){
       hintImg.show().zIndex(40)
+
+    }
+    let showHintImg2 = function(){
+      hintImg2.show().zIndex(40)
 
     }
     let showProcedureImg = function(){
@@ -715,8 +747,12 @@ const Scenes = {
 
     }
 
-    let hideHintImg = function(){
+    let hideHintImg1 = function(){
       hintImg.hide()
+
+    }
+    let hideHintImg2 = function(){
+      hintImg2.hide()
 
     }
     let hideProcedureImg = function(){
@@ -726,11 +762,14 @@ const Scenes = {
 
     
 
-    btn[0].item.onmouseover = showHintImg
-    btn[0].item.onmouseout = hideHintImg
+    btn[0].item.onmouseover = showHintImg1
+    btn[0].item.onmouseout = hideHintImg1
 
-    btn[1].item.onmouseover = showProcedureImg
-    btn[1].item.onmouseout = hideProcedureImg
+    btn[1].item.onmouseover = showHintImg2
+    btn[1].item.onmouseout = hideHintImg2
+
+    btn[2].item.onmouseover = showProcedureImg
+    btn[2].item.onmouseout = hideProcedureImg
 
  
 
@@ -866,1273 +905,947 @@ const Scenes = {
           
         return true;
       }),    
-    (step1 = function () {
-      setIsProcessRunning(true);
-      // to hide previous step
-      Dom.hideAll();
-      Scenes.items.projectIntro.hide()
-      Dom.setBlinkArrow(-1);
-      Scenes.items.btn_next.show()
-      Scenes.items.slider_box.hide()
-      // Scenes.items.btn_reset_connections.styles({
-      //   position: "absolute",
-      //   right: 0,
-      //   top: "195px",
-      //   backgroundColor: "blue",
-      //   color: "white",
-      // })
+      (step1 = function () {
+        setIsProcessRunning(true);
+        // to hide previous step
+        Dom.hideAll();
+        Scenes.items.projectIntro.hide()
+        Dom.setBlinkArrow(-1);
+        Scenes.items.btn_next.show()
+        Scenes.items.slider_box.hide()
+        // Scenes.items.btn_reset_connections.styles({
+        //   position: "absolute",
+        //   right: 0,
+        //   top: "195px",
+        //   backgroundColor: "blue",
+        //   color: "white",
+        // })
 
-      // Scenes.setStepHeading("Step-1", "Circuit Formulation");
-      Scenes.changeHeader("1")
-      Scenes.showPopup(1)
-      // Scenes.items.btn_popup_box.styles({
-        // display : "none"
-      // })
+        // Scenes.setStepHeading("Step-1", "Circuit Formulation");
+        Scenes.changeHeader("1")
+        Scenes.showPopup(1)
+        // Scenes.items.btn_popup_box.styles({
+          // display : "none"
+        // })
 
-      // Scenes.items.changeHeader.setContent("sneha")
-      setCC("Connect all the terminals correctly to form the circuit")
+        // Scenes.items.changeHeader.setContent("sneha")
+        setCC("Connect all the terminals correctly to form the circuit")
 
-      let vertexBox = new Dom(".vertex-box")
-      vertexBox.show()
+        let vertexBox = new Dom(".vertex-box")
+        vertexBox.show()
 
-      //! Required positions
-      Scenes.items.part_1_components.set(-2,-64, 523, 950)
+        //! Required positions
+        Scenes.items.part_1_components.set(-2,-64, 523, 950)
 
-      Scenes.items.header_helper.set(420,-110, 60, 380).zIndex(10000)
-      Scenes.items.btn_hint.set(863, 75, 36).zIndex(1)
+        Scenes.items.header_helper.set(420,-110, 60, 380).zIndex(10000)
+        Scenes.items.btn_hint.set(863, 75, 36).zIndex(1)
+        Scenes.items.btn_hint_2.set(863, 75+40, 36).zIndex(1)
 
-      Scenes.items.btn_procedure.set(770, 180, 51, 175).zIndex(1)
-      Scenes.items.btn_reset.set(770, 236, 52, 175).zIndex(1)
-      Scenes.items.btn_check_connections.set(770, 285, 82, 175).zIndex(1)
-      Scenes.items.btn_cmpltd_circuit_diagram .set(770, 370, 82, 175).zIndex(1)
+        // Scenes.items.hint_popup_box.set(502, -29, 418).zIndex(10)
+        // Scenes.items.hint_popup_box_2.set(9, -33+40, 440).zIndex(10)
 
-      function isConnectionsRight(isConnectionsCorrect,matchedGraphIdx=-1){
-        let imgToShow = null
-        if(isConnectionsCorrect){
-          imgToShow = Scenes.items.text_correct_connections_box.set(550,300,75).zIndex(100)
-          setCC("Connections correct")
-          // arrow for connected connections
-          Dom.setBlinkArrowRed(true,720,388,40, null, 180).play()
-          let circuitImages = [
-            Scenes.items.part_1_circuit_1,
-            Scenes.items.part_1_circuit_2,
-            Scenes.items.part_1_circuit_3,
-            Scenes.items.part_1_circuit_4,
-          ]
-          // ! onclick for show circtuit dia
-          Scenes.items.btn_cmpltd_circuit_diagram.item.onclick = ()=>{
-            circuitImages[matchedGraphIdx].set(0,-49,500,950).zIndex(100)
-            Dom.setBlinkArrowRed(true,674,380,40,null,180).play()
-            setCC("Push-pull converter is ready for experiment")
-            Scenes.items.btn_begin_experiment.set(734,363,75).zIndex(102)
-            Scenes.items.btn_begin_experiment.item.onclick = ()=>{
-              setIsProcessRunning(false);
-              Scenes.next()
-            }
-          }
-        }
-        else{
-          setCC("Incorrect connections, try again")
-          Dom.setBlinkArrowRed(true,720,39,40, null, 180).play()
-          imgToShow = Scenes.items.text_incorrect_connections_box.set(550,300,120).zIndex(100)
-        }
-        anime({
-          targets: imgToShow.item,
-          delay: 1000,
-          duration: 3500,
-          easing: "linear",
-          opacity: [0.4,1,0.4],
-          begin(){
-            Dom.setBlinkArrowRed(-1)
-          },
-          complete: () => {
-            if(isConnectionsCorrect){
-              Dom.setBlinkArrowRed(true,720,388,40, null, 180).play()
-            }else{
-              Dom.setBlinkArrowRed(true,720,239,40, null, 180).play()
-            }
-            imgToShow.hide()
-          }
-        })
-      }
+        Scenes.items.btn_procedure.set(770, 180, 51, 175).zIndex(1)
+        Scenes.items.btn_reset.set(770, 236, 52, 175).zIndex(1)
+        Scenes.items.btn_check_connections.set(770, 285, 82, 175).zIndex(1)
+        Scenes.items.btn_cmpltd_circuit_diagram .set(770, 370, 82, 175).zIndex(1)
 
-
-      Scenes.items.slider_box.hide();
-      // ! JSPLumb cable 
-      function cable(){
-        
-        Scenes.items.btn_check_connections.item.onclick = checkCableConnection
-        // ! connections array contains connected idxs
-        // connected vertex src and dest
-        let allConnectedVertexSrcDest = []
-        // ! initializing the checkgraph for connections
-        let matricesForCheckGraph = []
-        // ! connection is right/wrong
-        let isConnectionRight = false
-        // set graph
-        function fillCheckGraph(){
-          //* to fill element in array
-          function create3DArray(size, rows, cols, initValue){
-            let filledArray = new Array(size)
-
-            for(let i=0;i<size;i++){
-              filledArray[i] = new Array(rows)
-
-              for(let j=0;j<rows;j++){
-                filledArray[i][j] = new Array(cols)
-
-                for(let k=0;k<cols;k++){
-                  filledArray[i][j][k] = initValue
-                }
+        function isConnectionsRight(isConnectionsCorrect,matchedGraphIdx=-1){
+          let imgToShow = null
+          if(isConnectionsCorrect){
+            imgToShow = Scenes.items.text_correct_connections_box.set(550,300,75).zIndex(100)
+            setCC("Connections correct")
+            // arrow for connected connections
+            Dom.setBlinkArrowRed(true,720,388,40, null, 180).play()
+            let circuitImages = [
+              Scenes.items.part_1_circuit_1,
+              Scenes.items.part_1_circuit_2,
+              Scenes.items.part_1_circuit_3,
+              Scenes.items.part_1_circuit_4,
+            ]
+            // ! onclick for show circtuit dia
+            Scenes.items.btn_cmpltd_circuit_diagram.item.onclick = ()=>{
+              circuitImages[matchedGraphIdx].set(0,-49,500,950).zIndex(100)
+              Dom.setBlinkArrowRed(true,674,380,40,null,180).play()
+              setCC("Push-pull converter is ready for experiment")
+              Scenes.items.btn_begin_experiment.set(734,363,75).zIndex(102)
+              Scenes.items.btn_begin_experiment.item.onclick = ()=>{
+                setIsProcessRunning(false);
+                Scenes.next()
               }
             }
-            return filledArray;
           }
-
-          // fill zero 
-          let graphSize = 4
-          let noOfVertex = 25
-          matricesForCheckGraph = create3DArray(graphSize, noOfVertex, noOfVertex, 0)
-          
-          //* 1-7 fixed connection is filled
-          let xAxisFixed = [1, 2, 2, 16, 17, 24, 7, 23, 23]
-          let yAxisFixed = [4, 15, 20, 13, 18, 11, 12, 10, 22 ]
-          for(let graph of matricesForCheckGraph){
-            for(let i in xAxisFixed){
-              graph[xAxisFixed[i]][yAxisFixed[i]] = 1
-              graph[yAxisFixed[i]][xAxisFixed[i]] = 1
-            }
+          else{
+            setCC("Incorrect connections, try again")
+            Dom.setBlinkArrowRed(true,720,39,40, null, 180).play()
+            imgToShow = Scenes.items.text_incorrect_connections_box.set(550,300,120).zIndex(100)
           }
-
-          let firstGraph = matricesForCheckGraph[0]
-          let secondGraph = matricesForCheckGraph[1]
-          let thirdGraph = matricesForCheckGraph[2]
-          let fourthGraph = matricesForCheckGraph[3]
-          
-          //* for first graph 
-          firstGraph[14][3] = 1
-          firstGraph[3][14] = 1
-          firstGraph[19][5] = 1
-          firstGraph[5][19] = 1
-          firstGraph[9][6] = 1
-          firstGraph[6][9] = 1
-          firstGraph[21][8] = 1
-          firstGraph[8][21] = 1
-          
-          //* for second graph 
-          secondGraph[14][3] = 1
-          secondGraph[3][14] = 1
-          secondGraph[19][5] = 1
-          secondGraph[5][19] = 1
-          secondGraph[21][6] = 1
-          secondGraph[6][21] = 1
-          secondGraph[9][8] = 1
-          secondGraph[8][9] = 1
-          
-          //* for third graph 
-          thirdGraph[14][5] = 1
-          thirdGraph[5][14] = 1
-          thirdGraph[19][3] = 1
-          thirdGraph[3][19] = 1
-          thirdGraph[21][6] = 1
-          thirdGraph[6][21] = 1
-          thirdGraph[9][8] = 1
-          thirdGraph[8][9] = 1
-          
-          //* for fourth graph 
-          fourthGraph[14][5] = 1
-          fourthGraph[5][14] = 1
-          fourthGraph[19][3] = 1
-          fourthGraph[3][19] = 1
-          fourthGraph[9][6] = 1
-          fourthGraph[6][9] = 1
-          fourthGraph[21][8] = 1
-          fourthGraph[8][21] = 1
-
-        } 
-        fillCheckGraph()
-
-        // ! check
-        function checkCableConnection() {
-          // console.log("sneha")
-          // console.log("sneha")
-          // if (connections.length == 0) {
-          //   alert("Please make the connections first");
-          //   return false;
-          // }
-          if (connections.length < 13) {
-            setCC("Connect all the terminals first")
-            return false;
-          }
-          if (connections.length >= 13) {
-            // ! listDiv contains vertexConnectionsName
-            // eg vertex10, vertex23
-            var listDiv = [];
-            for (var j = 0; j < connections.length; j++) {
-              let pos = [connections[j].targetId,connections[j].sourceId] 
-              listDiv.push(pos)
-            }
-            // ! Matched Graph Idx
-            let matchedGraphIdx = -1
-            // whos graph is matched with connections
-            let matchedWithGraph = [0,0,0,0]
-            // ! Main logic for checking graph
-            for(let i=0;i<listDiv.length;i++){
-              // * to convert div to idx only
-              function convertDivtextToIdx(divText){
-                let convertedText = ""
-                let text = divText.substr(-2)
-                let num1 = text[0]
-                let num2 = text[1]
-                if(!isNaN(num1))
-                  convertedText+=num1
-                if(!isNaN(num2))
-                  convertedText+=num2
-                return parseInt(convertedText)
+          anime({
+            targets: imgToShow.item,
+            delay: 1000,
+            duration: 3500,
+            easing: "linear",
+            opacity: [0.4,1,0.4],
+            begin(){
+              Dom.setBlinkArrowRed(-1)
+            },
+            complete: () => {
+              if(isConnectionsCorrect){
+                Dom.setBlinkArrowRed(true,720,388,40, null, 180).play()
+              }else{
+                Dom.setBlinkArrowRed(true,720,239,40, null, 180).play()
               }
-              // substr is so i can extract the number from the id
-              let vertexSrcIdx = convertDivtextToIdx(listDiv[i][0])
-              let vertexDestIdx = convertDivtextToIdx(listDiv[i][1])
-              allConnectedVertexSrcDest.push([vertexSrcIdx,vertexDestIdx])
-              
+              imgToShow.hide()
             }
+          })
+        }
 
-            //! check for total four possibilities
-            matricesForCheckGraph.forEach((checkGraph,graphIdx)=>{
-              // * in connected
-              let connections = allConnectedVertexSrcDest
-              for(let connectionIdx in connections){
-                var connection = connections[connectionIdx]
-                var vertexSrcIdx = connection[0]
-                var vertexDestIdx = connection[1]
-                if(checkGraph[vertexSrcIdx][vertexDestIdx] == 1){
-                  console.log(`graphIdx:${graphIdx}`,connectionIdx,connection)
-                  if(connectionIdx == connections.length - 1){
-                    isConnectionRight = true
-                    matchedWithGraph[graphIdx] = 1
+
+        Scenes.items.slider_box.hide();
+        // ! JSPLumb cable 
+        function cable(){
+          
+          Scenes.items.btn_check_connections.item.onclick = checkCableConnection
+          // ! connections array contains connected idxs
+          // connected vertex src and dest
+          let allConnectedVertexSrcDest = []
+          // ! initializing the checkgraph for connections
+          let matricesForCheckGraph = []
+          // ! connection is right/wrong
+          let isConnectionRight = false
+          // set graph
+          function fillCheckGraph(){
+            //* to fill element in array
+            function create3DArray(size, rows, cols, initValue){
+              let filledArray = new Array(size)
+
+              for(let i=0;i<size;i++){
+                filledArray[i] = new Array(rows)
+
+                for(let j=0;j<rows;j++){
+                  filledArray[i][j] = new Array(cols)
+
+                  for(let k=0;k<cols;k++){
+                    filledArray[i][j][k] = initValue
                   }
                 }
-                else{
-                  // alert("wrong")
-                  matchedWithGraph[graphIdx] = 0
-                  break
+              }
+              return filledArray;
+            }
+
+            // fill zero 
+            let graphSize = 4
+            let noOfVertex = 25
+            matricesForCheckGraph = create3DArray(graphSize, noOfVertex, noOfVertex, 0)
+            
+            //* 1-7 fixed connection is filled
+            let xAxisFixed = [1, 2, 2, 16, 17, 24, 7, 23, 23]
+            let yAxisFixed = [4, 15, 20, 13, 18, 11, 12, 10, 22 ]
+            for(let graph of matricesForCheckGraph){
+              for(let i in xAxisFixed){
+                graph[xAxisFixed[i]][yAxisFixed[i]] = 1
+                graph[yAxisFixed[i]][xAxisFixed[i]] = 1
+              }
+            }
+
+            let firstGraph = matricesForCheckGraph[0]
+            let secondGraph = matricesForCheckGraph[1]
+            let thirdGraph = matricesForCheckGraph[2]
+            let fourthGraph = matricesForCheckGraph[3]
+            
+            //* for first graph 
+            firstGraph[14][3] = 1
+            firstGraph[3][14] = 1
+            firstGraph[19][5] = 1
+            firstGraph[5][19] = 1
+            firstGraph[9][6] = 1
+            firstGraph[6][9] = 1
+            firstGraph[21][8] = 1
+            firstGraph[8][21] = 1
+            
+            //* for second graph 
+            secondGraph[14][3] = 1
+            secondGraph[3][14] = 1
+            secondGraph[19][5] = 1
+            secondGraph[5][19] = 1
+            secondGraph[21][6] = 1
+            secondGraph[6][21] = 1
+            secondGraph[9][8] = 1
+            secondGraph[8][9] = 1
+            
+            //* for third graph 
+            thirdGraph[14][5] = 1
+            thirdGraph[5][14] = 1
+            thirdGraph[19][3] = 1
+            thirdGraph[3][19] = 1
+            thirdGraph[21][6] = 1
+            thirdGraph[6][21] = 1
+            thirdGraph[9][8] = 1
+            thirdGraph[8][9] = 1
+            
+            //* for fourth graph 
+            fourthGraph[14][5] = 1
+            fourthGraph[5][14] = 1
+            fourthGraph[19][3] = 1
+            fourthGraph[3][19] = 1
+            fourthGraph[9][6] = 1
+            fourthGraph[6][9] = 1
+            fourthGraph[21][8] = 1
+            fourthGraph[8][21] = 1
+
+          } 
+          fillCheckGraph()
+
+          // ! check
+          function checkCableConnection() {
+            // console.log("sneha")
+            // console.log("sneha")
+            // if (connections.length == 0) {
+            //   alert("Please make the connections first");
+            //   return false;
+            // }
+            if (connections.length < 13) {
+              setCC("Connect all the terminals first")
+              return false;
+            }
+            if (connections.length >= 13) {
+              // ! listDiv contains vertexConnectionsName
+              // eg vertex10, vertex23
+              var listDiv = [];
+              for (var j = 0; j < connections.length; j++) {
+                let pos = [connections[j].targetId,connections[j].sourceId] 
+                listDiv.push(pos)
+              }
+              // ! Matched Graph Idx
+              let matchedGraphIdx = -1
+              // whos graph is matched with connections
+              let matchedWithGraph = [0,0,0,0]
+              // ! Main logic for checking graph
+              for(let i=0;i<listDiv.length;i++){
+                // * to convert div to idx only
+                function convertDivtextToIdx(divText){
+                  let convertedText = ""
+                  let text = divText.substr(-2)
+                  let num1 = text[0]
+                  let num2 = text[1]
+                  if(!isNaN(num1))
+                    convertedText+=num1
+                  if(!isNaN(num2))
+                    convertedText+=num2
+                  return parseInt(convertedText)
+                }
+                // substr is so i can extract the number from the id
+                let vertexSrcIdx = convertDivtextToIdx(listDiv[i][0])
+                let vertexDestIdx = convertDivtextToIdx(listDiv[i][1])
+                allConnectedVertexSrcDest.push([vertexSrcIdx,vertexDestIdx])
+                
+              }
+
+              //! check for total four possibilities
+              matricesForCheckGraph.forEach((checkGraph,graphIdx)=>{
+                // * in connected
+                let connections = allConnectedVertexSrcDest
+                for(let connectionIdx in connections){
+                  var connection = connections[connectionIdx]
+                  var vertexSrcIdx = connection[0]
+                  var vertexDestIdx = connection[1]
+                  if(checkGraph[vertexSrcIdx][vertexDestIdx] == 1){
+                    console.log(`graphIdx:${graphIdx}`,connectionIdx,connection)
+                    if(connectionIdx == connections.length - 1){
+                      isConnectionRight = true
+                      matchedWithGraph[graphIdx] = 1
+                    }
+                  }
+                  else{
+                    // alert("wrong")
+                    matchedWithGraph[graphIdx] = 0
+                    break
+                  }
+                }
+              })
+              matchedGraphIdx = matchedWithGraph.indexOf(1)
+              // ! for right connection note
+              if(matchedGraphIdx != -1){
+                // alert(`Correct Connections: ${matchedGraphIdx}`)
+                console.log(matchedGraphIdx,matchedWithGraph)
+                isConnectionsRight(true, matchedGraphIdx)
+              }else{
+                // ! for wrong connection
+                // alert("Wrong Connections, try again.")
+                isConnectionsRight(false)
+                allConnectedVertexSrcDest = []
+              }
+            }
+            
+          }
+          // checkCableConnection()
+          (showConnectionInfo = function (listDiv) {
+          }),
+          (hideConnectionInfo = function (listDiv) {
+            listDiv.style.display = "none";
+          }),
+          (connections = []),
+          (updateConnections = function (conn, remove) {
+            if (!remove) {
+              connections.push(conn);
+              // ! show blink when all vertex are connected
+              // todo change size 4 to 13
+              if(connections.length == 13){
+                Dom.setBlinkArrowRed(true,720,305,40, null, 180).play()
+              }
+            }
+
+            else {
+              var idx = -1;
+              for (var i = 0; i < connections.length; i++) {
+                if (connections[i] == conn) {
+                  idx = i;
+                  break;
                 }
               }
-            })
-            matchedGraphIdx = matchedWithGraph.indexOf(1)
-            // ! for right connection note
-            if(matchedGraphIdx != -1){
-              // alert(`Correct Connections: ${matchedGraphIdx}`)
-              console.log(matchedGraphIdx,matchedWithGraph)
-              isConnectionsRight(true, matchedGraphIdx)
-            }else{
-              // ! for wrong connection
-              // alert("Wrong Connections, try again.")
-              isConnectionsRight(false)
-              allConnectedVertexSrcDest = []
+              if (idx != -1) connections.splice(idx, 1);
             }
-          }
-          
-        }
-        // checkCableConnection()
-        (showConnectionInfo = function (listDiv) {
-        }),
-        (hideConnectionInfo = function (listDiv) {
-          listDiv.style.display = "none";
-        }),
-        (connections = []),
-        (updateConnections = function (conn, remove) {
-          if (!remove) {
-            connections.push(conn);
-            // ! show blink when all vertex are connected
-            // todo change size 4 to 13
-            if(connections.length == 13){
-              Dom.setBlinkArrowRed(true,720,305,40, null, 180).play()
-            }
-          }
-
-          else {
-            var idx = -1;
-            for (var i = 0; i < connections.length; i++) {
-              if (connections[i] == conn) {
-                idx = i;
-                break;
+            if (connections.length > 0) {
+              var listDiv = [];
+              for (var j = 0; j < connections.length; j++) {
+                let pos = [connections[j].targetId,connections[j].sourceId] 
+                listDiv.push(pos)
               }
+              showConnectionInfo(listDiv);
             }
-            if (idx != -1) connections.splice(idx, 1);
-          }
-          if (connections.length > 0) {
-            var listDiv = [];
-            for (var j = 0; j < connections.length; j++) {
-              let pos = [connections[j].targetId,connections[j].sourceId] 
-              listDiv.push(pos)
-            }
-            showConnectionInfo(listDiv);
-          }
-        });
-
-        jsPlumb.ready(function () {
-          var instance = jsPlumb.getInstance();
-
-          // suspend drawing and initialise.
-          instance.batch(function () {
-            // bind to connection/connectionDetached events, and update the list of connections on screen.
-            instance.bind("connection", function (info, originalEvent) {
-              updateConnections(info.connection);
-            });
-            instance.bind("connectionDetached", function (info, originalEvent) {
-              updateConnections(info.connection, true);
-            });
-
-            instance.bind("connectionMoved", function (info, originalEvent) {
-              //  only remove here, because a 'connection' event is also fired.
-              // in a future release of jsplumb this extra connection event will not
-              // be fired.
-              updateConnections(info.connection, true);
-            });
-
-            // configure some drop options for use by all endpoints.
-            var exampleDropOptions = {
-              tolerance: "touch",
-              hoverClass: "dropHover",
-              activeClass: "dragActive",
-            };
-
-            // ! for setting up the endpoints
-            function setEndPoint(maxConnections=1){
-              let radius = 10
-              let endPointStyleData = {
-                endpoint: ["Dot", { radius: radius }],
-                paintStyle: { fill: "red" },
-                isSource: true,
-                scope: "green",
-                connectorStyle: { stroke: "#0000f6", strokeWidth: 6 },
-                connector: ["Bezier", { curviness: -50 }],
-                maxConnections: maxConnections,
-                isTarget: true,
-                dropOptions: exampleDropOptions,
-              }
-              return endPointStyleData
-            }
-
-            var exampleEndpoint1 = setEndPoint()
-            var exampleEndpoint2 = setEndPoint(2)
-            var exampleEndpoint3 = setEndPoint()
-            var exampleEndpoint4 = setEndPoint()
-            var exampleEndpoint5 = setEndPoint()
-            var exampleEndpoint6 = setEndPoint()
-            var exampleEndpoint7 = setEndPoint(2)
-            var exampleEndpoint8 = setEndPoint()
-            var exampleEndpoint9 = setEndPoint()
-            var exampleEndpoint10 = setEndPoint()
-            var exampleEndpoint11 = setEndPoint()
-
-            // conn 1
-            instance.addEndpoint(
-              "vertex1",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint1
-            );
-            instance.addEndpoint(
-              "vertex4",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint1
-            );
-
-            // conn 2
-            instance.addEndpoint(
-              "vertex2",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint2
-            );
-            instance.addEndpoint(
-              "vertex15",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint2
-            );
-            instance.addEndpoint(
-              "vertex20",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint2
-            );
-
-            // conn 3
-            instance.addEndpoint(
-              "vertex16",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint3
-            );
-            instance.addEndpoint(
-              "vertex13",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint3
-            );
-
-            //* conn 4
-            instance.addEndpoint(
-              "vertex17",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint4
-            );
-            instance.addEndpoint(
-              "vertex18",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint4
-            );
-
-            //*conn 5
-            instance.addEndpoint(
-              "vertex24",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint5
-            );
-            instance.addEndpoint(
-              "vertex11",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint5
-            );
-
-            //*conn 6
-            instance.addEndpoint(
-              "vertex7",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint6
-            );
-            instance.addEndpoint(
-              "vertex12",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint6
-            );
-            //*conn 7
-            instance.addEndpoint(
-              "vertex23",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint7
-            );
-            instance.addEndpoint(
-              "vertex10",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint7
-            );
-            instance.addEndpoint(
-              "vertex22",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint7
-            );
-
-            //*conn 8
-            instance.addEndpoint(
-              "vertex14",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint8
-            );
-            instance.addEndpoint(
-              "vertex3",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint8
-            );
-            instance.addEndpoint(
-              "vertex5",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint8
-            );
-
-            //*conn 9
-            instance.addEndpoint(
-              "vertex19",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint9
-            );
-            instance.addEndpoint(
-              "vertex5",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint9
-            );
-            instance.addEndpoint(
-              "vertex3",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint9
-            );
-
-            //*conn 10
-            instance.addEndpoint(
-              "vertex9",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint10
-            );
-            instance.addEndpoint(
-              "vertex6",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint10
-            );
-            instance.addEndpoint(
-              "vertex21",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint10
-            );
-
-            //*conn 11
-            instance.addEndpoint(
-              "vertex21",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint11
-            );
-            instance.addEndpoint(
-              "vertex8",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint11
-            );
-            instance.addEndpoint(
-              "vertex9",
-              { anchor: [0.75, 0, 0, -1] },
-              exampleEndpoint11
-            );
-
-
-            /*instance.addEndpoint("vertex9", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint4);
-            instance.addEndpoint("vertex10", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint4);
-            instance.addEndpoint("vertex11", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint3);
-            instance.addEndpoint("vertex12", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint3);*/
-
-            instance.draggable(jsPlumb.getSelector(".drag-drop-demo .window"));
-
-            var hideLinks = jsPlumb.getSelector(".drag-drop-demo .hide");
-            instance.on(hideLinks, "click", function (e) {
-              instance.toggleVisible(this.getAttribute("rel"));
-              jsPlumbUtil.consume(e);
-            });
-
-            var dragLinks = jsPlumb.getSelector(".drag-drop-demo .drag");
-            instance.on(dragLinks, "click", function (e) {
-              var s = instance.toggleDraggable(this.getAttribute("rel"));
-              this.innerHTML = s ? "disable dragging" : "enable dragging";
-              jsPlumbUtil.consume(e);
-            });
-
-            var detachLinks = jsPlumb.getSelector(".drag-drop-demo .detach");
-            instance.on(detachLinks, "click", function (e) {
-              instance.deleteConnectionsForElement(this.getAttribute("rel"));
-              jsPlumbUtil.consume(e);
-            });
-
-            // ! reset
-            instance.on(Scenes.items.btn_reset.item, "click", function (e) {
-              // instance.detachEveryConnection();
-              instance.deleteEveryConnection()
-              showConnectionInfo("");
-              jsPlumbUtil.consume(e);
-              Dom.setBlinkArrowRed(-1)
-            });
           });
 
-          jsPlumb.fire("jsPlumbDemoLoaded", instance);
-        });
-      }
+          jsPlumb.ready(function () {
+            var instance = jsPlumb.getInstance();
 
-      // calling cable function
-      cable()
-      
-      // ------ end
+            // suspend drawing and initialise.
+            instance.batch(function () {
+              // bind to connection/connectionDetached events, and update the list of connections on screen.
+              instance.bind("connection", function (info, originalEvent) {
+                updateConnections(info.connection);
+              });
+              instance.bind("connectionDetached", function (info, originalEvent) {
+                updateConnections(info.connection, true);
+              });
+
+              instance.bind("connectionMoved", function (info, originalEvent) {
+                //  only remove here, because a 'connection' event is also fired.
+                // in a future release of jsplumb this extra connection event will not
+                // be fired.
+                updateConnections(info.connection, true);
+              });
+
+              // configure some drop options for use by all endpoints.
+              var exampleDropOptions = {
+                tolerance: "touch",
+                hoverClass: "dropHover",
+                activeClass: "dragActive",
+              };
+
+              // ! for setting up the endpoints
+              function setEndPoint(maxConnections=1){
+                let radius = 10
+                let endPointStyleData = {
+                  endpoint: ["Dot", { radius: radius }],
+                  paintStyle: { fill: "red" },
+                  isSource: true,
+                  scope: "green",
+                  connectorStyle: { stroke: "#0000f6", strokeWidth: 6 },
+                  connector: ["Bezier", { curviness: -50 }],
+                  maxConnections: maxConnections,
+                  isTarget: true,
+                  dropOptions: exampleDropOptions,
+                }
+                return endPointStyleData
+              }
+
+              var exampleEndpoint1 = setEndPoint()
+              var exampleEndpoint2 = setEndPoint(2)
+              var exampleEndpoint3 = setEndPoint()
+              var exampleEndpoint4 = setEndPoint()
+              var exampleEndpoint5 = setEndPoint()
+              var exampleEndpoint6 = setEndPoint()
+              var exampleEndpoint7 = setEndPoint(2)
+              var exampleEndpoint8 = setEndPoint()
+              var exampleEndpoint9 = setEndPoint()
+              var exampleEndpoint10 = setEndPoint()
+              var exampleEndpoint11 = setEndPoint()
+
+              // conn 1
+              instance.addEndpoint(
+                "vertex1",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint1
+              );
+              instance.addEndpoint(
+                "vertex4",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint1
+              );
+
+              // conn 2
+              instance.addEndpoint(
+                "vertex2",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint2
+              );
+              instance.addEndpoint(
+                "vertex15",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint2
+              );
+              instance.addEndpoint(
+                "vertex20",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint2
+              );
+
+              // conn 3
+              instance.addEndpoint(
+                "vertex16",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint3
+              );
+              instance.addEndpoint(
+                "vertex13",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint3
+              );
+
+              //* conn 4
+              instance.addEndpoint(
+                "vertex17",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint4
+              );
+              instance.addEndpoint(
+                "vertex18",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint4
+              );
+
+              //*conn 5
+              instance.addEndpoint(
+                "vertex24",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint5
+              );
+              instance.addEndpoint(
+                "vertex11",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint5
+              );
+
+              //*conn 6
+              instance.addEndpoint(
+                "vertex7",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint6
+              );
+              instance.addEndpoint(
+                "vertex12",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint6
+              );
+              //*conn 7
+              instance.addEndpoint(
+                "vertex23",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint7
+              );
+              instance.addEndpoint(
+                "vertex10",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint7
+              );
+              instance.addEndpoint(
+                "vertex22",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint7
+              );
+
+              //*conn 8
+              instance.addEndpoint(
+                "vertex14",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint8
+              );
+              instance.addEndpoint(
+                "vertex3",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint8
+              );
+              instance.addEndpoint(
+                "vertex5",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint8
+              );
+
+              //*conn 9
+              instance.addEndpoint(
+                "vertex19",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint9
+              );
+              instance.addEndpoint(
+                "vertex5",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint9
+              );
+              instance.addEndpoint(
+                "vertex3",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint9
+              );
+
+              //*conn 10
+              instance.addEndpoint(
+                "vertex9",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint10
+              );
+              instance.addEndpoint(
+                "vertex6",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint10
+              );
+              instance.addEndpoint(
+                "vertex21",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint10
+              );
+
+              //*conn 11
+              instance.addEndpoint(
+                "vertex21",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint11
+              );
+              instance.addEndpoint(
+                "vertex8",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint11
+              );
+              instance.addEndpoint(
+                "vertex9",
+                { anchor: [0.75, 0, 0, -1] },
+                exampleEndpoint11
+              );
 
 
+              /*instance.addEndpoint("vertex9", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint4);
+              instance.addEndpoint("vertex10", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint4);
+              instance.addEndpoint("vertex11", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint3);
+              instance.addEndpoint("vertex12", { anchor: [0.75, 0, 0, -1] }, exampleEndpoint3);*/
 
-      return true
-    }),
-    (step2 = function () {
-      setIsProcessRunning(true);
-      // * destroy all the connection
-      Scenes.items.btn_reset.item.click()
-      getAll(".jtk-endpoint").forEach(ele=>{
-        ele.style.display = "none"
-      })
+              instance.draggable(jsPlumb.getSelector(".drag-drop-demo .window"));
 
-      // Scenes.setStepHeading(
-      //   "Step-2",
-      //   "Voltage and current waveforms."
-      // )
-      Scenes.changeHeader("2")
-      Scenes.forMathematicalExpressionBtn = 0
-      console.log(Scenes.forMathematicalExpressionBtn)
-      Scenes.forProcedureBtn = 0
-      Scenes.items.slider_box.show()
-      sliders.showForWaveform()
+              var hideLinks = jsPlumb.getSelector(".drag-drop-demo .hide");
+              instance.on(hideLinks, "click", function (e) {
+                instance.toggleVisible(this.getAttribute("rel"));
+                jsPlumbUtil.consume(e);
+              });
 
-      
-      Scenes.items.btn_next.show();
-      function stepTutorial2(){
+              var dragLinks = jsPlumb.getSelector(".drag-drop-demo .drag");
+              instance.on(dragLinks, "click", function (e) {
+                var s = instance.toggleDraggable(this.getAttribute("rel"));
+                this.innerHTML = s ? "disable dragging" : "enable dragging";
+                jsPlumbUtil.consume(e);
+              });
 
-        setCC("Select V<sub>G</sub>")
-          Dom.setBlinkArrowRed(true,57,125,30,30,90).play()
-          
-          sliders.vArrow.onclick = ()=>{
-            Dom.setBlinkArrowRed(true,362,185,30,30,90).play()
-            setCC("Select R")
+              var detachLinks = jsPlumb.getSelector(".drag-drop-demo .detach");
+              instance.on(detachLinks, "click", function (e) {
+                instance.deleteConnectionsForElement(this.getAttribute("rel"));
+                jsPlumbUtil.consume(e);
+              });
 
-            sliders.sliderV()
-            sliders.vArrow.click()
+              // ! reset
+              instance.on(Scenes.items.btn_reset.item, "click", function (e) {
+                // instance.detachEveryConnection();
+                instance.deleteEveryConnection()
+                showConnectionInfo("");
+                jsPlumbUtil.consume(e);
+                Dom.setBlinkArrowRed(-1)
+              });
+            });
 
-            sliders.r.onclick = ()=>{
-              Dom.setBlinkArrowRed(true,169,25,30,30,90).play()
-              setCC("Select Turns ratio")
-      
-              sliders.n.oninput = ()=>{
-                Dom.setBlinkArrowRed(true,134,-5,30,30,90).play()
-                setCC("Select D")
+            jsPlumb.fire("jsPlumbDemoLoaded", instance);
+          });
+        }
+
+        // calling cable function
+        cable()
         
+        // ------ end
 
-              sliders.d.onclick = ()=>{
-                Dom.setBlinkArrowRed(true,335,5,30,30,90).play()
 
-                setCC("Press Record Waveforms")   
 
+        return true
+      }),
+      (step2 = function () {
+        setIsProcessRunning(true);
+        // * destroy all the connection
+        Scenes.items.btn_reset.item.click()
+        getAll(".jtk-endpoint").forEach(ele=>{
+          ele.style.display = "none"
+        })
+
+        // Scenes.setStepHeading(
+        //   "Step-2",
+        //   "Voltage and current waveforms."
+        // )
+        Scenes.changeHeader("2")
+        Scenes.forMathematicalExpressionBtn = 0
+        console.log(Scenes.forMathematicalExpressionBtn)
+        Scenes.forProcedureBtn = 0
+        Scenes.items.slider_box.show()
+        sliders.showForWaveform()
+
+        
+        Scenes.items.btn_next.show();
+        function stepTutorial2(){
+
+          setCC("Select V<sub>G</sub>")
+            Dom.setBlinkArrowRed(true,57,125,30,30,90).play()
+            
+            sliders.vArrow.onclick = ()=>{
+              Dom.setBlinkArrowRed(true,362,185,30,30,90).play()
+              setCC("Select R")
+
+              sliders.sliderV()
+              sliders.vArrow.click()
+
+              sliders.r.onclick = ()=>{
+                Dom.setBlinkArrowRed(true,169,25,30,30,90).play()
+                setCC("Select Turns ratio")
+        
+                sliders.n.oninput = ()=>{
+                  Dom.setBlinkArrowRed(true,134,-5,30,30,90).play()
+                  setCC("Select D")
+          
+
+                sliders.d.onclick = ()=>{
+                  Dom.setBlinkArrowRed(true,335,5,30,30,90).play()
+
+                  setCC("Press Record Waveforms")   
+
+                }
               }
             }
           }
         }
-      }
-      stepTutorial2()
-      
-  //! new images added
-  Scenes.items.btn_record_waveforms.set(300, -44, 45).zIndex(10000)
-  Scenes.items.btn_record_values.set(389, -44, 45).zIndex(10000)
-  Scenes.items.btn_reset_all.set(0,207, 40).zIndex(10000)
-  Scenes.items.part_2_graph_empty.set(0, -49, 499, 975)
-  Scenes.items.part_2_graph.set(0, -49, 499, 975).hide()
-  Scenes.items.part_2_graph_with_arrow.set(0, -49, 499, 975).hide()
-
-  // todo 
-  //* edit the resistance min max value
-  // slider.r.min = "4";
-  // slider.r.max = "12";
-  // slider.r.step = "4";
-      
-
-  // ! temp values and text
-  let st = {
-    backgroundColor: "white",
-    border: "2px solid black",
-    color: "black",
-    borderRadius: "0",
-    width: "fit-content",
-    textAlign: "center",
-    padding: "2px 4px",
-    fontSize: "0.9rem",
-    lineHeight: "13px"
-  }
-  let textLabels = [
-    // ! vp
-    vP1 = Scenes.items.tempTitle24.set(530,9).setContent("nV<sub>s</sub> = 0 V").styles(st).hide(),
-
-    vP2 = Scenes.items.tempTitle25.set(634,42).setContent("0 V").styles(st).hide(),
-    
-    // ! inductor current iL
-    iL1 = Scenes.items.tempTitle26.set(618,82).setContent(" i<sub>2</sub> = 0 A").styles(st).hide(),
-
-    iL2 = Scenes.items.tempTitle27.set(556,99).setContent(" I<sub>L</sub> = 0 A").styles(st).hide(),
-
-    iL3 = Scenes.items.tempTitle28.set(682,110).setContent(" i<sub>1</sub> = 0 A").styles(st).hide(),
-    
-    //! inductor voltage vL
-    vL1 = Scenes.items.tempTitle29.set(618,144).setContent(" (nV<sub>G</sub> - V<sub>0</sub>) = 0 V").styles(st).hide(),
-    vL2 = Scenes.items.tempTitle30.set(642,172).setContent(" (-V<sub>0</sub>) = 0 V").styles(st).hide(),
-
-    //!switch current iQ1
-    iQ1 = Scenes.items.tempTitle31.set(616,202).setContent(" (i<sub>Q1_2</sub>) = 0 A").styles(st).hide(),
-    iQ2 = Scenes.items.tempTitle32.set(686,218).setContent("0 A").styles(st).hide(),
-    iQ3 = Scenes.items.tempTitle33.set(716,203).setContent(" (i<sub>Q1_1</sub>) = 0 A").styles(st).hide(),
-    
-    //! switch voltage vQ1
-    vQ1 = Scenes.items.tempTitle34.set(550,289).setContent("0 V").styles(st).hide(),
-    vQ2 = Scenes.items.tempTitle35.set(570,254).setContent("(V<sub>G</sub>) = 0 V").styles(st).hide(),
-    vQ3 = Scenes.items.tempTitle36.set(640,253).setContent("(2V<sub>G</sub>) = 0 V").styles(st).hide(),
-
-    //! diode current iD1
-    iD1 = Scenes.items.tempTitle37.set(618,319).setContent("i<sub>2</sub> = 0 A").styles(st).hide(),
-    iD2 = Scenes.items.tempTitle38.set(642,352).setContent("i<sub>2</sub>/2 = 0 A").styles(st).hide(),
-    iD3 = Scenes.items.tempTitle39.set(718,326).setContent("i<sub>1</sub> = 0 A").styles(st).hide(),
-    iD4 = Scenes.items.tempTitle40.set(829,319).setContent("i<sub>1</sub>/2 = 0 A").styles(st).hide(),
-    iD5 = Scenes.items.tempTitle41.set(893,345).setContent("0 A").styles(st).hide(),
-
-    //!diode voltage vD1
-    vD1 = Scenes.items.tempTitle42.set(550,385).setContent("0 V").styles(st).hide(),
-    vD2 = Scenes.items.tempTitle43.set(635,400).setContent("(-2nV<sub>G</sub>) = 0 V").styles(st).hide(),
-
-    //!output current iO
-    iO1 = Scenes.items.tempTitle44.set(410,309).setContent("(i<sub>O</sub>) = 0 A").styles(st).hide(),
-    iO2 = Scenes.items.tempTitle45.set(405,334).setContent("(V<sub>O</sub>) = 0 A").styles(st).hide(),
-
-    //!input current iG
-    iG1 = Scenes.items.tempTitle46.set(250,365).setContent("i<sub>1</sub> = 0 A").styles(st).hide(),
-    iG2 = Scenes.items.tempTitle47.set(277,395).setContent("i<sub>2</sub> = 0 A").styles(st).hide(),
-    iG3 = Scenes.items.tempTitle48.set(405,414).setContent("(V<sub>G</sub>) = 0 A").styles(st).hide(),
-  ]
-  
-  // if(showValues){
-  //   textLabels.forEach((ele,idx)=>{
-  //     ele.setContent(textValues[idx]).show()
-  //   })
-  // }
- 
-      let currentGraph = Scenes.items.part_2_graph_empty
-
-      let btn_record_waveforms = Scenes.items.btn_record_waveforms
-      let btn_record_values = Scenes.items.btn_record_values
-      let btn_reset_all = Scenes.items.btn_reset_all
-
-
-      btn_record_waveforms.item.onclick = function(){
-        Dom.setBlinkArrowRed(true,420,5,30,30,90).play()
+        stepTutorial2()
         
-        setCC("Press Record Values")
+    //! new images added
+    Scenes.items.btn_record_waveforms.set(300, -44, 45).zIndex(10000)
+    Scenes.items.btn_record_values.set(389, -44, 45).zIndex(10000)
+    Scenes.items.btn_reset_all.set(0,207, 40).zIndex(10000)
+    Scenes.items.part_2_graph_empty.set(0, -49, 499, 975)
+    Scenes.items.part_2_graph.set(0, -49, 499, 975).hide()
+    Scenes.items.part_2_graph_with_arrow.set(0, -49, 499, 975).hide()
 
-        currentGraph.hide()
-        Scenes.items.part_2_graph.show()
-        currentGraph = Scenes.Scenes.items.part_2_graph
-      }
+    // todo 
+    //* edit the resistance min max value
+    // slider.r.min = "4";
+    // slider.r.max = "12";
+    // slider.r.step = "4";
+        
 
-      btn_record_values.item.onclick = function(){
-        let vInValue = Number(sliders.v.value)
-        let dutyRatioValue = Number(sliders.d.value)
-        let resistanceValue = Number(sliders.r.value)
-        let nValue = Number(sliders.n.value)
+    // ! temp values and text
+    let st = {
+      backgroundColor: "white",
+      border: "2px solid black",
+      color: "black",
+      borderRadius: "0",
+      width: "fit-content",
+      textAlign: "center",
+      padding: "2px 4px",
+      fontSize: "0.9rem",
+      lineHeight: "13px"
+    }
+    let textLabels = [
+      // ! vp
+      vP1 = Scenes.items.tempTitle24.set(530,9).setContent("nV<sub>s</sub> = 0 V").styles(st).hide(),
 
-        updateValues(vInValue,dutyRatioValue,resistanceValue,nValue)
+      vP2 = Scenes.items.tempTitle25.set(634,42).setContent("0 V").styles(st).hide(),
+      
+      // ! inductor current iL
+      iL1 = Scenes.items.tempTitle26.set(618,82).setContent(" i<sub>2</sub> = 0 A").styles(st).hide(),
 
-        // setting values from formulas
-        function setTempTitleAndValues(showValues=false,vInValue=0){  
+      iL2 = Scenes.items.tempTitle27.set(556,99).setContent(" I<sub>L</sub> = 0 A").styles(st).hide(),
+
+      iL3 = Scenes.items.tempTitle28.set(682,110).setContent(" i<sub>1</sub> = 0 A").styles(st).hide(),
+      
+      //! inductor voltage vL
+      vL1 = Scenes.items.tempTitle29.set(618,144).setContent(" (nV<sub>G</sub> - V<sub>0</sub>) = 0 V").styles(st).hide(),
+      vL2 = Scenes.items.tempTitle30.set(642,172).setContent(" (-V<sub>0</sub>) = 0 V").styles(st).hide(),
+
+      //!switch current iQ1
+      iQ1 = Scenes.items.tempTitle31.set(616,202).setContent(" (i<sub>Q1_2</sub>) = 0 A").styles(st).hide(),
+      iQ2 = Scenes.items.tempTitle32.set(686,218).setContent("0 A").styles(st).hide(),
+      iQ3 = Scenes.items.tempTitle33.set(716,203).setContent(" (i<sub>Q1_1</sub>) = 0 A").styles(st).hide(),
+      
+      //! switch voltage vQ1
+      vQ1 = Scenes.items.tempTitle34.set(550,289).setContent("0 V").styles(st).hide(),
+      vQ2 = Scenes.items.tempTitle35.set(570,254).setContent("(V<sub>G</sub>) = 0 V").styles(st).hide(),
+      vQ3 = Scenes.items.tempTitle36.set(640,253).setContent("(2V<sub>G</sub>) = 0 V").styles(st).hide(),
+
+      //! diode current iD1
+      iD1 = Scenes.items.tempTitle37.set(618,319).setContent("i<sub>2</sub> = 0 A").styles(st).hide(),
+      iD2 = Scenes.items.tempTitle38.set(642,352).setContent("i<sub>2</sub>/2 = 0 A").styles(st).hide(),
+      iD3 = Scenes.items.tempTitle39.set(718,326).setContent("i<sub>1</sub> = 0 A").styles(st).hide(),
+      iD4 = Scenes.items.tempTitle40.set(829,319).setContent("i<sub>1</sub>/2 = 0 A").styles(st).hide(),
+      iD5 = Scenes.items.tempTitle41.set(893,345).setContent("0 A").styles(st).hide(),
+
+      //!diode voltage vD1
+      vD1 = Scenes.items.tempTitle42.set(550,385).setContent("0 V").styles(st).hide(),
+      vD2 = Scenes.items.tempTitle43.set(635,400).setContent("(-2nV<sub>G</sub>) = 0 V").styles(st).hide(),
+
+      //!output current iO
+      iO1 = Scenes.items.tempTitle44.set(410,309).setContent("(i<sub>O</sub>) = 0 A").styles(st).hide(),
+      iO2 = Scenes.items.tempTitle45.set(405,334).setContent("(V<sub>O</sub>) = 0 A").styles(st).hide(),
+
+      //!input current iG
+      iG1 = Scenes.items.tempTitle46.set(250,365).setContent("i<sub>1</sub> = 0 A").styles(st).hide(),
+      iG2 = Scenes.items.tempTitle47.set(277,395).setContent("i<sub>2</sub> = 0 A").styles(st).hide(),
+      iG3 = Scenes.items.tempTitle48.set(405,414).setContent("(V<sub>G</sub>) = 0 A").styles(st).hide(),
+    ]
     
-          let v0 = parseFloat(Number(Formulas.step2.v0(values)).toFixed(1))
-          let i0  = parseFloat(Number(Formulas.step2.i0(values)).toFixed(1))
-          let iL = parseFloat(Number( Formulas.step2.iL(values).toFixed(1)))
-          let i2 = parseFloat(Number( Formulas.step2.i2(values).toFixed(1)))
-          let i1 = parseFloat(Number( Formulas.step2.i1(values).toFixed(1)))
-          let iQ12 = parseFloat(Number( Formulas.step2.iQ12(values).toFixed(1)))
-          let iQ11 = parseFloat(Number( Formulas.step2.iQ11(values).toFixed(1)))
-
-          console.log(vInValue,dutyRatioValue,resistanceValue,nValue)
-
-          let textValues = [
-            //! vp 
-            vP1 = `${ nValue * vInValue}V`,
-            vP2 = `${ 0 }V`,
-            
-            //! inductor current iL
-            iL1 = `${ iL }A`,
-            iL2 = `${ i2 }A`,
-            iL3 = `${ i1 }A`,
-            
-            //! vL 
-            vL1 = `${ (nValue * vInValue) - v0}V`,
-            vL2 = `${ - v0}V`,
-            
-            //! switch current iQ1
-            iQ1 = `${ iQ12 }A`,
-            iQ2 = `${ 0 }A`,
-            iQ3 = `${ iQ11 }A`,
-            
-            //! switch voltage vQ
-            vQ1 = `${ 0 }V`,
-            vQ2 = `${ v0 }V`,
-            vQ3 = `${ 2*v0 }V`,
-            
-            //! diode current iD1
-            iD1 = `${ i2 }A`,
-            iD2 = `${ i1 / 2 }A`,
-            iD3 = `${ i1 }A`,
-            iD4 = `${ i2 / 2 }A`,
-            iD5 = `${ 0 }A`,
-            
-            //! diode voltage vQ
-            vD1 = `${ 0 }V`,
-            vD2 = `${-2 * nValue* v0 }V`,
-            
-            //! input current iD1
-            iO1 = `${ i0 }A`,
-            iO2 = `${ v0 }A`,
-            
-            //! switch voltage vQ
-            iG1 = `${ i2 }V`,
-            iG2 = `${ i1 }V`,
-            iG3 = `${ v0 }V`,
-          ]  
-      
-          // also show the all values and graph uppper image
-          // Scenes.items.part_2_graph_data_upper.show()
-          if(showValues){
-            textLabels.forEach((ele,idx)=>{
-              ele.setContent(textValues[idx]).show()
-            })
-          }
-        }
-        setTempTitleAndValues(true,vInValue)
-        currentGraph.hide()
-        Scenes.items.part_2_graph_with_arrow.show()
-        currentGraph = Scenes.items.part_2_graph_with_arrow
-
-        Dom.setBlinkArrowRed(-1)
-        Dom.setBlinkArrow(true, 790, 408).play()
-        setCC("Click 'Next' to go to next step")
-        setIsProcessRunning(false)
-      }
-
-      btn_reset_all.item.onclick = function(){
-        Scenes.steps[3]()
-      }
-      
-      
-      let isOneTimeOver = false
-      // ! onclick for record
-      Scenes.items.btn_record.item.onclick = function () {
-        Dom.setBlinkArrowRed(-1)
-        // ! Activate the next btn right after the click
-        
-        
-        let vInValue = Number(sliders.selectOp1.value)
-        let dutyRatioValue = Number(sliders.slider.value)
-        let resistanceValue = Number(sliders.selectOp2.value)
-        let nValue = Number(sliders.selectOp3.value)
-
-        updateValues(vInValue,dutyRatioValue,resistanceValue,nValue)
-
-        // setting values from formulas
-        function setTempTitleAndValues(showValues=false,vInValue=0){  
-    
-          let v0 = parseFloat(Number(Formulas.step2.v0(values)).toFixed(1))
-          let i0  = parseFloat(Number(Formulas.step2.i0(values)).toFixed(1))
-          let iL = parseFloat(Number( Formulas.step2.iL(values).toFixed(1)))
-          let delIL = parseFloat(Number( Formulas.step2.delILL(values).toFixed(1)))
-          let i2 = parseFloat(Number( Formulas.step2.i2(values).toFixed(1)))
-          let i1 = parseFloat(Number( Formulas.step2.i1(values).toFixed(1)))
-          let iQ12 = parseFloat(Number( Formulas.step2.iQ12(values).toFixed(1)))
-          let iQ11 = parseFloat(Number( Formulas.step2.iQ11(values).toFixed(1)))
-
-          console.log("v0:",v0,"iIn:",iIn)
-          console.log(vInValue,dutyRatioValue,resistanceValue,nValue)
-
-          let textValues = [
-            //! vp 
-            vP1 = `${ nValue * vInValue}V`,
-            vP2 = `${ 0 }V`,
-            
-            //! inductor current iL
-            iL1 = `${ iL }A`,
-            iL2 = `${ i2 }A`,
-            iL3 = `${ i1 }A`,
-            
-            //! vL 
-            vL1 = `${ (nValue * vInValue) - v0}V`,
-            vL2 = `${ - v0}V`,
-            
-            //! switch current iQ1
-            iQ1 = `${ iQ12 }A`,
-            iQ2 = `${ 0 }A`,
-            iQ3 = `${ iQ11 }A`,
-            
-            //! switch voltage vQ
-            vQ1 = `${ 0 }V`,
-            vQ2 = `${ v0 }V`,
-            vQ3 = `${ 2*v0 }V`,
-            
-            //! diode current iD1
-            iD1 = `${ i2 }A`,
-            iD2 = `${ i1 / 2 }A`,
-            iD3 = `${ i1 }A`,
-            iD4 = `${ i2 / 2 }A`,
-            iD5 = `${ 0 }A`,
-            
-            //! diode voltage vQ
-            vD1 = `${ 0 }V`,
-            vD2 = `${-2 * nValue* v0 }V`,
-            
-            //! input current iD1
-            iO1 = `${ i0 }A`,
-            iO2 = `${ v0 }A`,
-            
-            //! switch voltage vQ
-            iG1 = `${ i2 }V`,
-            iG2 = `${ i1 }V`,
-            iG3 = `${ v0 }V`,
-          ]  
-      
-          // also show the all values and graph uppper image
-          // Scenes.items.part_2_graph_data_upper.show()
-          if(showValues){
-            textLabels.forEach((ele,idx)=>{
-              ele.setContent(textValues[idx]).show()
-            })
-          }
-        }
-        setTempTitleAndValues(true,vInValue)
-
-
-        // if (dutyRatioValue == 0.25){
-        //   currentGraph.hide();
-        //   Scenes.items.new_part_2_graph_1.show();
-        //   currentGraph = Scenes.items.new_part_2_graph_1;
-        // }
-        // if (dutyRatioValue == 0.5){
-        //   currentGraph.hide();
-        //   Scenes.items.new_part_2_graph_2.show();
-        //   currentGraph = Scenes.items.new_part_2_graph_2;
-        // }
-        // if (dutyRatioValue == 0.75){
-        //   currentGraph.hide();
-        //   Scenes.items.new_part_2_graph_3.show();
-        //   currentGraph = Scenes.items.new_part_2_graph_3;
-        // }
-        // setIsProcessRunning(false);
-        // Dom.setBlinkArrow(true, 630, 315)
-
-        // speak test
-        if(isOneTimeOver==false){
-          setCC("For the these set input voltage and duty ratio, various component voltage and current waveforms are displayed here.",6)
-          isOneTimeOver = true
-        }
-
-        // after complete
-        setTimeout(()=>{
-          Dom.setBlinkArrow(true, 790, 408).play()
-          // setCC("Click 'Next' to go to next step")
-          setIsProcessRunning(false)
-        },5000)
-      };
-
-      return true
-    }),
-
-    // (step2 = function () {
-    //   setIsProcessRunning(true);
-    //   // destory all the connection 
-    //   // Scenes.items.btn_reset_connections.item.click()
-    //   // getAll(".jtk-endpoint").forEach(ele=>{
-    //   //   ele.style.display = "none"
-    //   // })
-      
-    //   // * for setting the slider to its default value
-    //   // let sliderValueInput = document.querySelector(".r .value-box input")
-    //   // sliderValueInput.value = 50
-    //   // sliderValueInput.onkeyup()
-
-    //   // Scenes.setStepHeading(
-    //   //   "Step-2",
-    //   //   "Voltage and current waveforms."
-    //   // )
-    //   function stepTutorial2(){
-
-    //     Dom.setBlinkArrowRed(true,30,-15,30,30,-90).play()
-    //     setCC("Select the value of V<sub>g</sub>")
-
-    //     sliders.vImg.onclick = ()=>{
-    //       sliderV()
-    //       sliders.vImg.click()
-    //       Dom.setBlinkArrowRed(true,185,114,null,null,90).play()
-    //       setCC("Set the value of D",5)
-
-    //       sliders.d.onclick = ()=>{
-    //         Dom.setBlinkArrowRed(true,440,40).play()
-    //         setCC("Set the value of R")
-
-    //         sliders.r.onclick = ()=>{
-    //           Dom.setBlinkArrowRed(true,405,-12,30,30,90).play()
-    //           setCC("Press Record")
-
-    //           // sliders.clearOnclick()
-    //         }
-    //       }
-    //     }
-    //   }
-    //   stepTutorial2()
-    //   Scenes.items.btn_next.show();
-
-    //   // //! Required Items
-    //   // Scenes.items.record_btn.set(355, -60, 70)
-    //   // Scenes.items.slider_box.item.style.scale = "0.8";
-    //   // Scenes.items.slider_box.show("flex").set(-120, -40);
-
-    //   Scenes.items.btn_record_waveforms.set(210, -44, 65).zIndex(10000)
-    //   Scenes.items.btn_record_values.set(340, -44, 65).zIndex(10000)
-    //   Scenes.items.btn_reset_all.set(0,207, 40).zIndex(10000)
-    //   // Scenes.items.part_2_graph_empty.set(0, -49, 499, 975)
-    //   Scenes.items.part_2_graph.set(0, -49, 499, 975)
-
-       
- 
-    //   // temp text on required positions
-    //   let allTempTitles = [
-
-    //     //temp titles for vp
-    //     Scenes.items.tempTitle1.setContent("0").set(555, 20),
-    //     Scenes.items.tempTitle2.setContent("s0").set(632, 48),
-
-    //     //inductor current il
-    //     //inductor voltage vL
-    //     //
-
-
-    //     Scenes.items.tempTitle3.setContent("0").set(690+4, -23+25),
-    //     Scenes.items.tempTitle4.setContent("0").set(548+4+2, -3+22),
-    //     Scenes.items.tempTitle5.setContent("0").set(548+4+2, 14+22),
-    //     Scenes.items.tempTitle6.setContent("0").set(620+4+2, -3+22),
-    //     Scenes.items.tempTitle7.setContent("0").set(620+4+2, 14+22),
-    //     Scenes.items.tempTitle8.setContent("0").set(694+4, 4+25-3),
-
-    //     //temp titles for switch
-    //     Scenes.items.tempTitle9.setContent("0").set(550, 100+16),
-    //     Scenes.items.tempTitle10.setContent("0").set(618+6, 102+12),
-    //     Scenes.items.tempTitle11.setContent("0").set(702+6, 100+14),
-    //     Scenes.items.tempTitle12.setContent("0").set(547+6, 125+11),
-    //     Scenes.items.tempTitle13.setContent("0").set(550+6, 141+11),
-    //     Scenes.items.tempTitle14.setContent("0").set(615, 134+9),
-    //     Scenes.items.tempTitle15.setContent("0").set(693+4, 132+10),
-
-    //     //for diode d
-    //     Scenes.items.tempTitle16.setContent("0").set(555+5, 228+1),
-    //     Scenes.items.tempTitle17.setContent("0").set(618, 228),
-    //     Scenes.items.tempTitle18.setContent("0").set(695+5, 228),
-    //     Scenes.items.tempTitle19.setContent("0").set(548+6, 255),
-    //     Scenes.items.tempTitle20.setContent("0").set(617+6, 249),
-    //     Scenes.items.tempTitle21.setContent("0").set(618+6, 266-1),
-    //     Scenes.items.tempTitle22.setContent("0").set(703+5, 257),
-                
-    //     //for capacitor
-    //     Scenes.items.tempTitle23.setContent("0").set(553+7, 355-10),
-    //     Scenes.items.tempTitle24.setContent("0").set(625+7, 355-10),
-    //     Scenes.items.tempTitle25.setContent("0").set(698+4, 355-10),
-    //     Scenes.items.tempTitle26.setContent("0").set(552+7, 385-13),
-    //     Scenes.items.tempTitle27.setContent("0").set(627+6, 376-13),
-    //     Scenes.items.tempTitle28.setContent("0").set(629+7, 393-14),
-    //     Scenes.items.tempTitle29.setContent("0").set(690+3, 384-13),
-        
-    //     //source maasurements
-    //     Scenes.items.tempTitle30.setContent("0").set(268+11, 230),
-    //     Scenes.items.tempTitle31.setContent("0").set(340+11, 230),
-    //     Scenes.items.tempTitle32.setContent("0").set(412+8, 230),
-    //     Scenes.items.tempTitle33.setContent("0").set(264+11+1, 252-2),
-    //     Scenes.items.tempTitle34.setContent("0").set(266+11, 269-2),
-    //     Scenes.items.tempTitle35.setContent("0").set(264 + 72+11, 252-2),
-    //     Scenes.items.tempTitle36.setContent("0").set(266 + 72+11, 269-2),
-    //     Scenes.items.tempTitle37.setContent("0").set(411+11-2, 259-1),
-
-    //     //load measurements
-    //     Scenes.items.tempTitle38.setContent("0").set(268+9, 230+128-12+2),
-    //     Scenes.items.tempTitle39.setContent("0").set(340+9, 230+128-12+2),
-    //     Scenes.items.tempTitle40.setContent("0").set(412+9, 230+128-12+2),
-    //     Scenes.items.tempTitle41.setContent("0").set(268+9-3+3, 230+128+25-12-2+2),
-    //     Scenes.items.tempTitle42.setContent("0").set(340+9-3, 230+128+25-12-2+2),
-    //     Scenes.items.tempTitle43.setContent("0").set(412+9-3, 230+128+25-12-2+2),
-    //   ];
-    //   allTempTitles.forEach(ele=>{
-    //     ele.styles({
-    //       color : "white",
-    //       backgroundColor : "black",
-    //       fontSize: "0.8em",
-    //       width : "28px",
-    //     })
+    // if(showValues){
+    //   textLabels.forEach((ele,idx)=>{
+    //     ele.setContent(textValues[idx]).show()
     //   })
- 
-    //   let currentGraph = Scenes.items.part_2_graph_empty
+    // }
+  
+        let currentGraph = Scenes.items.part_2_graph_empty
 
-       
-    //   // *  chage the step size of the sliders
-    //   // let dutyRatioSlider = Scenes.items.slider_D.item.children[1].children[0];
-    //   let dutyRatioSlider = Scenes.items.slider_D.item;
-    //   let valueInput = document.querySelector(".d .value-box input")
-    //   valueInput.readonly = true
-    //   dutyRatioSlider.min = "0.25";
-    //   dutyRatioSlider.max = "0.75";
-    //   dutyRatioSlider.step = "0.25"
-    //   dutyRatioSlider.value = "0.25"
-    //   valueInput.value = 0.25
+        let btn_record_waveforms = Scenes.items.btn_record_waveforms
+        let btn_record_values = Scenes.items.btn_record_values
+        let btn_reset_all = Scenes.items.btn_reset_all
 
-    //   // ! fixing d slider
-    //   // dutyRatioSlider.oninput = ()=>{
-    //   //   let sliderImg = document.querySelector(".slider-D-arrow")
-    //   //   let dVal = dutyRatioSlider.value
-    //   //   switch(dVal){
-    //   //     case "0.25":
-    //   //       sliderImg.style.left = "218px"
-    //   //       valueInput.value = 0.25
-    //   //       break
-    //   //     case "0.5":
-    //   //       sliderImg.style.left = "242.4px"
-    //   //       valueInput.value = 0.5
-    //   //       break
-    //   //     case "0.75":
-    //   //       sliderImg.style.left = "269px"
-    //   //       valueInput.value = 0.75
-    //   //       break
 
-    //   //   }
-    //   // }
-    //   dutyRatioSlider.oninput()
-      
-    //   function arrowBlinkForAll(){
-    //     setCC("Change the parameters to see the effect")
-    //     anime.timeline({
-    //       easing: "linear",
-    //       duration: 1500,
-    //     })
-    //     .add({
-    //       delay: 3000,
-    //     })
-    //     .add({
-    //       begin(){
-    //         Dom.setBlinkArrowRed(true,30,-15,30,30,-90).play()
-    //       }
-    //     })
-    //     .add({
-    //       begin(){
-    //         Dom.setBlinkArrowRed(true,185,114,null,null,90).play()
-    //       }
-    //     })
-    //     .add({
-    //       begin(){
-    //         Dom.setBlinkArrowRed(true,440,40).play()
-    //       }
-    //     })
-    //     .add({
-    //       begin(){
-    //         Dom.setBlinkArrowRed(true,405,-12,30,30,90).play()
-    //       }
-    //     })
-    //   }
- 
-    //   // // ! onclick for record
-    //   // let isClicked = false
-    //   // Scenes.items.record_btn.item.onclick = function () {
-    //   //   Dom.setBlinkArrowRed(-1)
-    //   //   if(isClicked == false){
-    //   //     arrowBlinkForAll()
-    //   //     isClicked = true
-    //   //   }
-    //   //   // ! Activate the next btn right after the click
-    //   //   // setCC("Click 'Next' to go to next step");
-        
-    //   //   // after complete
-    //   //   // Dom.setBlinkArrow(true, 790, 408).play();
-    //   //   // let allSliderValue = $(".range-slider__value");
-        
-    //   //   // let vInValue = Number(allSliderValue[0].innerHTML);
-    //   //   // let dutyRatioValue = Number(allSliderValue[1].innerHTML);
-    //   //   // let resistanceValue = Number(allSliderValue[2].value);
-        
-        
-    //   //   // Scenes.items.tempTitle2.setContent(v0);
-        
-    //   //   let dutyRatioValue = Number(sliders.d.value);
-    //   //   let resistanceValue = Number(sliders.r.value);
-    //   //   let vG = Number(sliders.v.value);
-    //   //   updateValues(vG, dutyRatioValue, resistanceValue);
-        
-    //   //   let v0 = Number(Formulas.step2.v0(values)).toFixed(1);
-    //   //   let iIn = Number(Formulas.step2.iIn(values)).toFixed(1);
-    //   //   let i0 = Number(Formulas.step2.i0(values)).toFixed(1);
-    //   //   let i1 = Number(Formulas.step2.i0(values)).toFixed(1);
-    //   //   let i2 = Number(Formulas.step2.i0(values)).toFixed(1);
-
-    //   //   // ! Calculate And set
-    //   //   function calculateAndUpdateTempTitles(){
-    //   //      //temp titles for inductor
-    //   //      Scenes.items.tempTitle1.setContent(vG)
-    //   //      Scenes.items.tempTitle2.setContent(Number(v0 - vG).toFixed(1))
-    //   //      Scenes.items.tempTitle3.setContent("0")
-    //   //      Scenes.items.tempTitle4.setContent(i1)
-    //   //      Scenes.items.tempTitle5.setContent(i2)
-    //   //      Scenes.items.tempTitle6.setContent(i2)
-    //   //      Scenes.items.tempTitle7.setContent(i1)
-    //   //      Scenes.items.tempTitle8.setContent(iIn)
- 
-    //   //      //temp titles for switch
-    //   //      Scenes.items.tempTitle9.setContent("0")
-    //   //      Scenes.items.tempTitle10.setContent(v0)
-    //   //      Scenes.items.tempTitle11.setContent(Number((1-dutyRatioValue) * v0).toFixed(1))
-    //   //      Scenes.items.tempTitle12.setContent(i1)
-    //   //      Scenes.items.tempTitle13.setContent(i2)
-    //   //      Scenes.items.tempTitle14.setContent("0")
-    //   //      Scenes.items.tempTitle15.setContent(Number(dutyRatioValue * iIn).toFixed(1))
- 
-    //   //      //for diode d
-    //   //      Scenes.items.tempTitle16.setContent(v0)
-    //   //      Scenes.items.tempTitle17.setContent("0")
-    //   //      Scenes.items.tempTitle18.setContent(Number(dutyRatioValue*v0).toFixed(1))
-    //   //      Scenes.items.tempTitle19.setContent("0")
-    //   //      Scenes.items.tempTitle20.setContent(i2)
-    //   //      Scenes.items.tempTitle21.setContent(i1)
-    //   //      Scenes.items.tempTitle22.setContent(Number((1-dutyRatioValue) * iIn).toFixed(1))
-                   
-    //   //      //for capacitor
-    //   //      Scenes.items.tempTitle23.setContent(v0)
-    //   //      Scenes.items.tempTitle24.setContent(v0)
-    //   //      Scenes.items.tempTitle25.setContent(v0)
-    //   //      Scenes.items.tempTitle26.setContent(i0)
-    //   //      Scenes.items.tempTitle27.setContent(Number(i2-i0).toFixed(1))
-    //   //      Scenes.items.tempTitle28.setContent(Number(i1-i0).toFixed(1))
-    //   //      Scenes.items.tempTitle29.setContent("0")
-           
-    //   //      //source maasurements
-    //   //      Scenes.items.tempTitle30.setContent(vG)
-    //   //      Scenes.items.tempTitle31.setContent(vG)
-    //   //      Scenes.items.tempTitle32.setContent(vG)
-    //   //      Scenes.items.tempTitle33.setContent(i1)
-    //   //      Scenes.items.tempTitle34.setContent(i2)
-    //   //      Scenes.items.tempTitle35.setContent(i2)
-    //   //      Scenes.items.tempTitle36.setContent(i1)
-    //   //      Scenes.items.tempTitle37.setContent(iIn)
- 
-    //   //      //load measurements
-    //   //      Scenes.items.tempTitle38.setContent(v0)
-    //   //      Scenes.items.tempTitle39.setContent(v0)
-    //   //      Scenes.items.tempTitle40.setContent(v0)
-    //   //      Scenes.items.tempTitle41.setContent(i0)
-    //   //      Scenes.items.tempTitle42.setContent(i0)
-    //   //      Scenes.items.tempTitle43.setContent(i0)
-    //   //   }
-        
-    //   //   if (dutyRatioValue == 0.25) {
-    //   //     updateValues(vG, dutyRatioValue, resistanceValue);
-
-    //   //     calculateAndUpdateTempTitles()
+        btn_record_waveforms.item.onclick = function(){
+          Dom.setBlinkArrowRed(true,420,5,30,30,90).play()
           
-    //   //     currentGraph.hide();
-    //   //     Scenes.items.part_2_graph_1.show();
-    //   //     currentGraph = Scenes.items.part_2_graph_1;
-    //   //   }
+          setCC("Press Record Values")
 
-    //   //   if (dutyRatioValue == 0.5) {
+          currentGraph.hide()
+          Scenes.items.part_2_graph.show()
+          currentGraph = Scenes.Scenes.items.part_2_graph
+        }
 
-    //   //     updateValues(vG, dutyRatioValue, resistanceValue);
+        btn_record_values.item.onclick = function(){
+          let vInValue = Number(sliders.v.value)
+          let dutyRatioValue = Number(sliders.d.value)
+          let resistanceValue = Number(sliders.r.value)
+          let nValue = Number(sliders.n.value)
 
-    //   //     calculateAndUpdateTempTitles()
+          updateValues(vInValue,dutyRatioValue,resistanceValue,nValue)
 
-    //   //     currentGraph.hide();
-    //   //     Scenes.items.part_2_graph_2.show();
-    //   //     currentGraph = Scenes.items.part_2_graph_2;
-    //   //   }
+          // setting values from formulas
+          function setTempTitleAndValues(showValues=false,vInValue=0){  
+      
+            let v0 = parseFloat(Number(Formulas.step2.v0(values)).toFixed(1))
+            let i0  = parseFloat(Number(Formulas.step2.i0(values)).toFixed(1))
+            let iL = parseFloat(Number( Formulas.step2.iL(values).toFixed(1)))
+            let i2 = parseFloat(Number( Formulas.step2.i2(values).toFixed(1)))
+            let i1 = parseFloat(Number( Formulas.step2.i1(values).toFixed(1)))
+            let iQ12 = parseFloat(Number( Formulas.step2.iQ12(values).toFixed(1)))
+            let iQ11 = parseFloat(Number( Formulas.step2.iQ11(values).toFixed(1)))
 
-    //   //   if (dutyRatioValue == 0.75) {
+            console.log(vInValue,dutyRatioValue,resistanceValue,nValue)
 
-    //   //     updateValues(vG, dutyRatioValue, resistanceValue);
+            let textValues = [
+              //! vp 
+              vP1 = `${ nValue * vInValue}V`,
+              vP2 = `${ 0 }V`,
+              
+              //! inductor current iL
+              iL1 = `${ iL }A`,
+              iL2 = `${ i2 }A`,
+              iL3 = `${ i1 }A`,
+              
+              //! vL 
+              vL1 = `${ (nValue * vInValue) - v0}V`,
+              vL2 = `${ - v0}V`,
+              
+              //! switch current iQ1
+              iQ1 = `${ iQ12 }A`,
+              iQ2 = `${ 0 }A`,
+              iQ3 = `${ iQ11 }A`,
+              
+              //! switch voltage vQ
+              vQ1 = `${ 0 }V`,
+              vQ2 = `${ v0 }V`,
+              vQ3 = `${ 2*v0 }V`,
+              
+              //! diode current iD1
+              iD1 = `${ i2 }A`,
+              iD2 = `${ i1 / 2 }A`,
+              iD3 = `${ i1 }A`,
+              iD4 = `${ i2 / 2 }A`,
+              iD5 = `${ 0 }A`,
+              
+              //! diode voltage vQ
+              vD1 = `${ 0 }V`,
+              vD2 = `${-2 * nValue* v0 }V`,
+              
+              //! input current iD1
+              iO1 = `${ i0 }A`,
+              iO2 = `${ v0 }A`,
+              
+              //! switch voltage vQ
+              iG1 = `${ i2 }V`,
+              iG2 = `${ i1 }V`,
+              iG3 = `${ v0 }V`,
+            ]  
+        
+            // also show the all values and graph uppper image
+            // Scenes.items.part_2_graph_data_upper.show()
+            if(showValues){
+              textLabels.forEach((ele,idx)=>{
+                ele.setContent(textValues[idx]).show()
+              })
+            }
+          }
+          setTempTitleAndValues(true,vInValue)
+          currentGraph.hide()
+          Scenes.items.part_2_graph_with_arrow.show()
+          currentGraph = Scenes.items.part_2_graph_with_arrow
 
-    //   //     calculateAndUpdateTempTitles()
+          Dom.setBlinkArrowRed(-1)
+          Dom.setBlinkArrow(true, 790, 408).play()
+          setCC("Click 'Next' to go to next step")
+          setIsProcessRunning(false)
+        }
 
-    //   //     currentGraph.hide();
-    //   //     Scenes.items.part_2_graph_3.show();
-    //   //     currentGraph = Scenes.items.part_2_graph_3;
-
+        btn_reset_all.item.onclick = function(){
+          Scenes.steps[3]()
+        }
+        
+        
+        let isOneTimeOver = false
+        // ! onclick for record
+        Scenes.items.btn_record.item.onclick = function () {
+          Dom.setBlinkArrowRed(-1)
+          // ! Activate the next btn right after the click
           
-    //   //   }
-    //   //   // completed
-    //   //   setIsProcessRunning(false);
-    //   // };
-      
+          
+          let vInValue = Number(sliders.selectOp1.value)
+          let dutyRatioValue = Number(sliders.slider.value)
+          let resistanceValue = Number(sliders.selectOp2.value)
+          let nValue = Number(sliders.selectOp3.value)
 
+          updateValues(vInValue,dutyRatioValue,resistanceValue,nValue)
+
+          // setting values from formulas
+          function setTempTitleAndValues(showValues=false,vInValue=0){  
       
-    //   return true
-    // }),
+            let v0 = parseFloat(Number(Formulas.step2.v0(values)).toFixed(1))
+            let i0  = parseFloat(Number(Formulas.step2.i0(values)).toFixed(1))
+            let iL = parseFloat(Number( Formulas.step2.iL(values).toFixed(1)))
+            let delIL = parseFloat(Number( Formulas.step2.delILL(values).toFixed(1)))
+            let i2 = parseFloat(Number( Formulas.step2.i2(values).toFixed(1)))
+            let i1 = parseFloat(Number( Formulas.step2.i1(values).toFixed(1)))
+            let iQ12 = parseFloat(Number( Formulas.step2.iQ12(values).toFixed(1)))
+            let iQ11 = parseFloat(Number( Formulas.step2.iQ11(values).toFixed(1)))
+
+            console.log("v0:",v0,"iIn:",iIn)
+            console.log(vInValue,dutyRatioValue,resistanceValue,nValue)
+
+            let textValues = [
+              //! vp 
+              vP1 = `${ nValue * vInValue}V`,
+              vP2 = `${ 0 }V`,
+              
+              //! inductor current iL
+              iL1 = `${ iL }A`,
+              iL2 = `${ i2 }A`,
+              iL3 = `${ i1 }A`,
+              
+              //! vL 
+              vL1 = `${ (nValue * vInValue) - v0}V`,
+              vL2 = `${ - v0}V`,
+              
+              //! switch current iQ1
+              iQ1 = `${ iQ12 }A`,
+              iQ2 = `${ 0 }A`,
+              iQ3 = `${ iQ11 }A`,
+              
+              //! switch voltage vQ
+              vQ1 = `${ 0 }V`,
+              vQ2 = `${ v0 }V`,
+              vQ3 = `${ 2*v0 }V`,
+              
+              //! diode current iD1
+              iD1 = `${ i2 }A`,
+              iD2 = `${ i1 / 2 }A`,
+              iD3 = `${ i1 }A`,
+              iD4 = `${ i2 / 2 }A`,
+              iD5 = `${ 0 }A`,
+              
+              //! diode voltage vQ
+              vD1 = `${ 0 }V`,
+              vD2 = `${-2 * nValue* v0 }V`,
+              
+              //! input current iD1
+              iO1 = `${ i0 }A`,
+              iO2 = `${ v0 }A`,
+              
+              //! switch voltage vQ
+              iG1 = `${ i2 }V`,
+              iG2 = `${ i1 }V`,
+              iG3 = `${ v0 }V`,
+            ]  
+        
+            // also show the all values and graph uppper image
+            // Scenes.items.part_2_graph_data_upper.show()
+            if(showValues){
+              textLabels.forEach((ele,idx)=>{
+                ele.setContent(textValues[idx]).show()
+              })
+            }
+          }
+          setTempTitleAndValues(true,vInValue)
+
+
+          // if (dutyRatioValue == 0.25){
+          //   currentGraph.hide();
+          //   Scenes.items.new_part_2_graph_1.show();
+          //   currentGraph = Scenes.items.new_part_2_graph_1;
+          // }
+          // if (dutyRatioValue == 0.5){
+          //   currentGraph.hide();
+          //   Scenes.items.new_part_2_graph_2.show();
+          //   currentGraph = Scenes.items.new_part_2_graph_2;
+          // }
+          // if (dutyRatioValue == 0.75){
+          //   currentGraph.hide();
+          //   Scenes.items.new_part_2_graph_3.show();
+          //   currentGraph = Scenes.items.new_part_2_graph_3;
+          // }
+          // setIsProcessRunning(false);
+          // Dom.setBlinkArrow(true, 630, 315)
+
+          // speak test
+          if(isOneTimeOver==false){
+            setCC("For the these set input voltage and duty ratio, various component voltage and current waveforms are displayed here.",6)
+            isOneTimeOver = true
+          }
+
+          // after complete
+          setTimeout(()=>{
+            Dom.setBlinkArrow(true, 790, 408).play()
+            // setCC("Click 'Next' to go to next step")
+            setIsProcessRunning(false)
+          },5000)
+        };
+
+        return true
+      }),
     (step3 = function () {
       setIsProcessRunning(true);
-      Scenes.items.btn_next.show()
       
+      speechSynthesis.cancel()
       // todo all previous elements hide
       Dom.hideAll();
       Scenes.items.contentAdderBox.item.innerHTML = ""
@@ -2140,7 +1853,6 @@ const Scenes = {
       // Scenes.setStepHeading("Step-3", "Performance Analysis.");
       Scenes.changeHeader("3")
 
-      setCC("Click on the 'ICON' to plot the performance characteristics.")
       
       // * remove all previous restrictions
       
@@ -2261,10 +1973,15 @@ const Scenes = {
 
       if(exit){
         // after complete
-        // Dom.setBlinkArrow(true, 790, 408).play();
-        setCC("Simulation Done");
-        setIsProcessRunning(false);
+        Scenes.items.btn_next.show()
+        setIsProcessRunning(false)
+        setCC("Click 'Next' to go to next step")
+        Dom.setBlinkArrow(true, 790, 414).play();
+        Scenes.currentStep = 8
+        return true
       }
+      
+      setCC("Click on the 'ICON' to plot the performance characteristics.")
 
       return true;
 
@@ -4560,36 +4277,189 @@ const Scenes = {
       
       return true
     }),
-    (temp = ()=>{
-      
+
+    // !Experimental result section
+    //! R LOAD  Waveforms section
+    (step8 = function () {
+      setIsProcessRunning(true);
+      // to hide previous step
+      Scenes.items.slider_box.hide()
+
+
+      //! Required Items
+      Scenes.items.btn_next.show();
+
+
+      //r load click
+      let arrowIdx = 0;
+      let arrows = [
+        () => {
+          Dom.setBlinkArrowRed(true, 532, 117, 30, null, 180).play();
+          arrowIdx++;
+        },
+        () => {
+          Dom.setBlinkArrowRed(true, 532, 210, 30, null, 180).play();
+          arrowIdx++;
+        },
+        () => {
+          Dom.setBlinkArrowRed(true, 532, 306, 30, null, 180).play();
+          arrowIdx++;
+        },
+        () => {
+          Dom.setBlinkArrowRed(-1);
+        },
+      ];
+
+      arrows[arrowIdx]();
+
+      Scenes.items.menu_page.set(5, -45, 425);
+      // Scenes.items.circle.set(426, 362, 76).hide();
+
+      let btns = [
+        Scenes.items.btn_1.set(580, 103, 58).zIndex(1),
+        Scenes.items.btn_2.set(580, 103+92, 58).zIndex(1),
+        Scenes.items.btn_3.set(580, 279, 87).zIndex(1),
+      ];
+
+      let vals = [
+        Scenes.items.val_vin.set(784, 110, 47).zIndex(1).hide(),
+        Scenes.items.val_vgs.set(784, 202, 49).zIndex(1).hide(),
+        Scenes.items.val_d.set(795, 284, 84).zIndex(1).hide(),
+      ];
+
+      let optionsClick = [0, 0, 0];
+      let btn_see_waveforms = Scenes.items.btn_click
+        .set(22, 325, 56)
+        .zIndex(1);
+
+      btns.forEach((btn, idx) => {
+        btn.item.onclick = () => {
+          arrows[arrowIdx]();
+          vals[idx].show();
+          optionsClick[idx] = 1;
+          if (optionsClick.indexOf(0) == -1) {
+            Scenes.items.circle.set(18, 314, 80);
+            btn_see_waveforms.item.classList.add("btn-img");
+            let scaleBtn = anime({
+              targets: Scenes.items.circle.item,
+              scale: [1, 1.1],
+              duration: 1000,
+              easing: "linear",
+              loop: true,
+            });
+            btn_see_waveforms.item.onclick = () => {
+              scaleBtn.reset();
+              waveformShow();
+            };
+          }
+        };
+      });
+
+      let scenes = [
+        Scenes.items.frame_1.set(20, 9, 420).hide(),
+        Scenes.items.frame_2.set(20, 9, 420).hide(),
+        Scenes.items.frame_3.set(20, 9, 420).hide(),
+      ];
+
+      let waveformShow = () => {
+        vals.forEach((_, idx) => {
+          btns[idx].hide();
+          vals[idx].hide();
+        });
+        Scenes.items.circle.hide();
+        Scenes.items.btn_click.hide();
+        Scenes.items.menu_page.hide();
+
+        Dom.setBlinkArrowRed(true, 592, 76, 30, null, 0).play();
+        // Dom.setBlinkArrowRed(-1);
+
+        scenes[0].show();
+        setCC(
+          "Switches Q1 and Q2 are given push-pull gating scheme of duty ratio 0.42. The input voltage is set to 12 volts."
+        );
+
+        setTimeout(() => {
+          // setCC("Click 'Next' to go to next step");
+          Dom.setBlinkArrow(true, 790, 415).play();
+          setIsProcessRunning(false);
+        }, 7000);
+      };
+
       return true;
     }),
-    // (completed = function () {
-    //   Dom.hideAll();
-    //   Scenes.items.contentAdderBox.setContent("");
 
-    //   // get(".btn-save").style.display = "block";
-    //   Scenes.items.btn_save.show().push();
-    //   Dom.setBlinkArrow(-1);
-    //   setCC("Download it and share with your friends.");
-    //   // certificate name
-    //   let certificateStuName = get("#certificateStuName");
-    //   certificateStuName.innerHTML = student_name;
-    //   // get("#quizScore").innerHTML = Quiz.score;
-    //   get("#certificateDate").innerHTML = currentDateGlobal;
-    //   Scenes.items.certificate.show("flex").push();
+    //! R LOAD  CLICK 2
+    (step9 = function () {
+      setIsProcessRunning(true);
 
-    //   // * restart btn
+      //! Required Items
+      Scenes.items.btn_next.show();
+      // to hide previous step
+      Scenes.items.frame_2.set(20, 9, 420);
+      Dom.setBlinkArrowRed(true, 592, 160, 30, null, 0).play();
 
-    //   let nxtBtn = get(".btn-next");
-    //   nxtBtn.innerHTML = "Restart";
-    //   nxtBtn.onclick = function () {
-    //     location.reload();
-    //   }
+      setCC(
+        "Switches Q1 and Q2 have identical staircase waveforms with phase shift. The peak switch voltage is 24 V which is  twice that of the set input voltage."
+      );
 
-    //   return true;
-    // }),
+      setTimeout(() => {
+        // setCC("Click 'Next' to go to next step");
+        Dom.setBlinkArrow(true, 790, 415).play();
+        setIsProcessRunning(false);
+      }, 7000);
+
+      //! Required Items
+
+      return true;
+    }),
+
+    //! R LOAD  CLICK 3
+    (step10 = function () {
+      setIsProcessRunning(true);
+
+      //! Required Items
+      Scenes.items.btn_next.show();
+      // Scenes.items.slider_box.hide();
+
+      // to hide previous step
+      Scenes.items.frame_3.set(20, 9, 420);
+      // Dom.setBlinkArrowRed(true, 555, 317, 30, null, 0).play();
+      // Dom.setBlinkArrowRed(-1)
+
+      setCC(
+        "Diodes Di1 and Di2 have identical waveforms with phase shift. The peak diode voltage is 24 V which is twice that of the set input voltage."
+      );
+
+      setTimeout(() => {
+        // setCC("Click 'Next' to go to next step");
+        // Dom.setBlinkArrow(true, 790, 415).play();
+        setCC("Simulation Done");  
+        // setIsProcessRunning(false);
+      }, 6000);
+
+      //! Required Items
+
+      return true;
+    }),
+
   ],
+  // ! For adding realcurrentstep in every step
+  // ! For tracking the current step accuratly
+  realCurrentStep: null,
+  setRealCurrentStep(){
+    let count = 0
+    this.steps.forEach((step,idx) => {
+      const constCount = count
+      let newStep = () => {
+        this.realCurrentStep = constCount;
+        console.log(`RealCurrentStep: ${this.realCurrentStep}`)
+        return step();
+      };
+
+      count++;
+      this.steps[idx] = newStep
+    });
+  },
   back() {
     //! animation isRunning
     // if (isRunning) {
@@ -4606,14 +4476,28 @@ const Scenes = {
     }
   },
   next() {
+    let ignore = true
+    const ignoreDrawerProgress = ()=>{
+      let stepsToIgnore = [5,6,7,8]
+      console.log(this.realCurrentStep)
+      ignore = stepsToIgnore.indexOf(this.realCurrentStep) != -1
+      return 
+    }
+    if(!this.realCurrentStep){
+      Scenes.setRealCurrentStep()
+    }
     //! animation isRunning
     if (isRunning) {
       return
     }
     if (this.currentStep < this.steps.length) {
+      ignoreDrawerProgress()
+
       if (this.steps[this.currentStep]()) {
-        nextDrawerItem();
-        nextProgressBar();
+        if(!ignore){
+          nextDrawerItem();
+          nextProgressBar();
+        }
         this.currentStep++;
       }         
     } else {

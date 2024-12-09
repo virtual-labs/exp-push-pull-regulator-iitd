@@ -10,10 +10,10 @@
         "d": "(0-100) %"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3: Push-pull converter switches are given complementary pulses with a dead time. Hence, duty ratio should be below 50 %.",
+        "d": "Explanation 4"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
@@ -29,10 +29,10 @@
         "d": "Thrice"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1: Due to the structure and gating scheme of the push-pull converter, the inductor current has a frequency twice that of the switching frequency.",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3",
+        "d": "Explanation 4"
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
@@ -47,10 +47,10 @@
         "d": "Inverting the output voltage polarity"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1: The presence of transformer provides electrical isolation between the input and output load. Also, its turns ratio provides a voltage scaling on the load side.",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3",
+        "d": "Explanation 4"
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
@@ -65,10 +65,10 @@
         "d": "V<sub>O</sub> = nDV<sub>G</sub>"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3",
+        "d": "Explanation 4: Applying volt-sec balance across the inductor gives the output voltage expression:<br><img src='images/expl4.png' height='30px'>"
       },
       "correctAnswer": "d",
       "difficulty": "beginner"
@@ -83,10 +83,10 @@
         "d": "Synchronized PWM signals with sufficient dead time"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Explanation 1",
+        "b": "Explanation 2: In push-pull converter, two switches are present that are given complementary gate pulses with suitable dead time.",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
       },
       "correctAnswer": "b",
       "difficulty": "beginner"

@@ -647,3 +647,8 @@ Substituting,<img src="images/th65.png" height="50px"> and solving the above equ
     ..(27)
       </div>
 <br><br>
+
+<div style="float: left; width:100%;">
+  
+#### ("For more Information on mathematical analysis, see references")
+<br></div>

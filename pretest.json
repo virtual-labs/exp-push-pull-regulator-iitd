@@ -1,0 +1,95 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "<center>Refer Fig. 1 to answer the following questions.<br> <img src='images/pre1.png' height='300px'><br><br>Fig. 1. Circuit configuration of push-pull converter.</center><br><br> 1. The feasible range of duty ratio for the switches (Q<sub>1</sub> and Q<sub>2</sub>) is:",
+      "answers": {  
+        "a": "(0-10) %",
+        "b": "(0-80) %",
+        "c": "(0-48) %",
+        "d": "(0-100) %"
+      },
+      "explanations": {
+        "a": "Explanation 1",
+        "b": "Explanation 2",
+        "c": "Explanation 3: Push-pull converter switches are given complementary pulses with a dead time. Hence, duty ratio should be below 50 %.",
+        "d": "Explanation 4"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+      
+    {
+
+      "question": "2. The frequency of the inductor current compared to the frequency of switches is?",
+      "answers": {
+        "a": "Double",
+        "b": "Half",
+        "c": "Equal",
+        "d": "Thrice"
+      },
+      "explanations": {
+        "a": "Explanation 1: Due to the structure and gating scheme of the push-pull converter, the inductor current has a frequency twice that of the switching frequency.",
+        "b": "Explanation 2",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    
+    {
+      "question": "3. The purpose of transformer in push-pull converter is?",
+      "answers": {
+        "a": "Voltage ratio transformation and electrical isolation",
+        "b": "Electrical isolation and impedance matching",
+        "c": "Energy storage only",
+        "d": "Inverting the output voltage polarity"
+      },
+      "explanations": {
+        "a": "Explanation 1: The presence of transformer provides electrical isolation between the input and output load. Also, its turns ratio provides a voltage scaling on the load side.",
+        "b": "Explanation 2",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+        
+    {
+    "question": "4. The output voltage expression of a push-pull converter is:",
+      "answers": {
+        "a": "V<sub>O</sub> = n(1-D)V<sub>G</sub>",
+        "b": "V<sub>O</sub> = DV<sub>G</sub>",
+        "c": "V<sub>O</sub> = V<sub>G</sub>/D",
+        "d": "V<sub>O</sub> = nDV<sub>G</sub>"
+      },
+      "explanations": {
+        "a": "Explanation 1",
+        "b": "Explanation 2",
+        "c": "Explanation 3",
+        "d": "Explanation 4: Applying volt-sec balance across the inductor gives the output voltage expression:<br><img src='images/expl4.png' height='30px'>"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    
+    {
+      "question": "5. The gating scheme of the two switches (Q<sub>1</sub> and Q<sub>2</sub>) is:",
+      "answers": {
+        "a": "Synchronized PWM signals",
+        "b": "180&#176; phase shifted PWM signals with sufficient dead time",
+        "c": "Complementary PWM signals",
+        "d": "Synchronized PWM signals with sufficient dead time"
+      },
+      "explanations": {
+        "a": "Explanation 1",
+        "b": "Explanation 2: In push-pull converter, two switches are present that are given complementary gate pulses with suitable dead time.",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}

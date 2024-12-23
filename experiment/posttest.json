@@ -2,37 +2,93 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "Refer Fig. 1 to answer the following questions.<br> <center> <img src='images/pos1.png' height='300px'><br><br>Fig. 1. Circuit configuration of push-pull converter.</center><br><br> 1. The voltage stress of the switches (Q<sub>1</sub> and Q<sub>2</sub>) is:",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "V<sub>O</sub>",
+        "b": "2V<sub>G</sub>",
+        "c": "V<sub>G</sub>",
+        "d": "V<sub>G</sub>/2"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Explanation 1",
+        "b": "Explanation 2: Applying KVL in the corresponding equivalent circuits gives the switch voltage as 2V<sub>G</sub>.",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
+
     {
-      "question": "This is a Sample Question 2?",
+      "question": "2. During dead time, the status of the switches (Q<sub>1</sub> and Q<sub>2</sub>) and the diodes (Di<sub>1</sub>, Di<sub>2</sub>) are :",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Q<sub>1</sub> -OFF, Q<sub>2</sub> – ON, Di<sub>1</sub> – OFF, Di<sub>2</sub> - ON",
+        "b": "Q<sub>1</sub> -ON, Q<sub>2</sub> – OFF, Di<sub>1</sub> – ON, Di<sub>2</sub> - OFF",
+        "c": "Q<sub>1</sub> -ON, Q<sub>2</sub> – ON, Di<sub>1</sub> – OFF, Di<sub>2</sub> - OFF",
+        "d": "Q<sub>1</sub> -OFF, Q<sub>2</sub> – OFF, Di<sub>1</sub> – ON, Di<sub>2</sub> - ON"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
+        "a": "Explanation 1",
         "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "Explanation 3",
+        "d": "Explanation 4: From the equivalent circuit it will be easy to identify the status of the devices."
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+
+    {
+      "question": "3. A push-pull converter is delivering an output power of 2 kW at an efficiency of 95%. Calculate the total losses (P<sub>Loss</sub>) occurring in the converter.",
+      "answers": {
+        "a": "90 W",
+        "b": "200 W",
+        "c": "105 W",
+        "d": "50 W"
+      },
+      "explanations": {
+        "a": "Explanation 1",
+        "b": "Explanation 2",
+        "c": "Explanation 3: <img src='images/expl1.png' height='60px'><br><img src='images/expl2.png' height='60px'>",
+        "d": "Explanation 4"
       },
       "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    
+    {  
+      "question": "4. The inductor ripple current expression is",
+      "answers": {
+        
+        "a": "<img src='images/postq1.png' height='55px'><br>",
+        "b": "<img src='images/postq2.png' height='55px'><br>",
+        "c": "<img src='images/postq3.png' height='55px'><br>",
+        "d": "<img src='images/postq4.png' height='55px'><br>"
+      },
+      "explanations": {
+        "a": "Explanation 1",
+        "b": "Explanation 2",
+        "c": "Explanation 3: <img src='images/expl3.png' height='60px'>",
+        "d": "Explanation 4"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+            
+    {
+      "question": "5. What is the voltage across the switches (Q<sub>1</sub> and Q<sub>2</sub>) when both the diodes (Di<sub>1</sub>, Di<sub>2</sub>) are conducting?",
+      "answers": {
+        "a": "V<sub>G</sub>",
+        "b": "2V<sub>G</sub>",
+        "c": "V<sub>G</sub>/2",
+        "d": "V<sub>O</sub>"
+      },
+      "explanations": {
+        "a": "Explanation 1: Applying KVL in the corresponding equivalent circuits gives the switch voltage as V<sub>G</sub>.",
+        "b": "Explanation 2",
+        "c": "Explanation 3",
+        "d": "Explanation 4"
+      },
+      "correctAnswer": "a",
       "difficulty": "beginner"
     }
   ]

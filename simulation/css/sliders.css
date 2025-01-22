@@ -1,0 +1,197 @@
+/* body{
+    background-color: #f1ece3;
+} */
+.universal-slider{
+    position: absolute;
+    top: -43px;
+    left: 0;
+}
+.universal-slider .slider-circuit{
+    position: relative;
+    width: 550px;
+    left: 0;
+    top: 0;
+    z-index: 20;
+}
+.universal-slider .slider .slider_R{
+    position: absolute;
+    left: 321px;
+    top: 200px;
+    width: 118px;
+    z-index: 499;
+}
+.universal-slider .slider .slider_R,.range-slider{
+    position: absolute;
+    left: 390px;
+    top: 80px;
+    width: 118px;
+    z-index: 499;
+    -webkit-appearance: none;
+    appearance: none;
+    transform: rotate(0deg);
+    height: 30px;
+    border-radius: 5px;
+    /* background: #d3d3d3; */
+    background: transparent;
+    outline: none;
+    opacity: 0.9;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.universal-slider .slider .slider_R::-webkit-slider-thumb,.range-slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    height:20px;
+    width:20px;
+    border: 0;
+    transform: rotate(0deg);
+    background: url('../src/images/sliders/slider_R_tip.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+}
+/* .universal-slider .slider .slider_R::-moz-range-thumb,.range-slider::-moz-range-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    transform: rotate(90deg);
+    background: url('./img/slider_tip.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+} */
+.universal-slider .slider .slider_R:hover,.range-slider:hover{
+    /* background-color: black; */
+    opacity: 1;
+}
+
+.universal-slider .slider .slider_R+img{
+    position: absolute;
+    left: 569px;
+    top: 120px;
+    z-index: 498;
+}
+.universal-slider .slider .value-box{
+    background-color: #800180;
+    border: 1px solid black;    
+    width: fit-content;
+    display: flex;
+    padding-left: 3px;
+    color: white;
+}
+.universal-slider .slider .value-box input{
+    border: none;
+    outline: none;
+    width: 30px;
+    font-weight: bold;
+    background-color: #b50bb5;
+    color: white;
+    transition: 0.1s;
+}
+
+
+/* ! slider n */
+.universal-slider .slider .n{
+    position: absolute;
+    left: 156px;
+    top: 43px;
+    z-index: 20;
+    width: fit-content;
+}
+.universal-slider .slider .n select{
+    background-color: #800180;
+    height: 23px;
+    color: white;
+}
+
+
+/* ! Fix positions of all slider input value */
+.universal-slider .slider .r .value-box{
+    position: absolute;
+    left: 229px;
+    top: 227px;
+    z-index: 500;
+}
+/* ! slider d */
+.universal-slider .slider .slider_D::-webkit-slider-thumb{
+    background: url('../src/images/sliders/slider_D_tip.png');
+    width: 21px;
+    height: 21px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.universal-slider .slider .slider_D{
+    transform: rotate(0deg);
+    left: 49px;
+    top: -3px;
+    width: 195px;
+    background-color: transparent;
+}
+
+.universal-slider .slider .d .value-box-d1{
+    position: absolute;
+    left: 91px;
+    top: 43px;
+    z-index: 500;
+}
+.universal-slider .slider .d .value-box-d2{
+    position: absolute;
+    left: 94px;
+    top: 196px;
+    z-index: 500;
+}
+.universal-slider .slider .slider_D+img{
+    position: absolute;
+    left: 218px;
+    top: 141px;
+    width: 80px;
+    z-index: 10;
+}
+
+/*! slider v */
+.universal-slider .slider .v .slider-V-arrow{
+    cursor: pointer;
+    position: absolute;
+    z-index: 200;
+    left: 52px;
+    top: 146px;
+    width: 30px;
+}
+.universal-slider .slider .v .value-box input{
+    width: 20px;
+}
+
+.universal-slider .slider .v .value-box{
+    position: absolute;
+    top: 94px;
+    left: 82px;
+    z-index: 200;
+}
+.slider-v-r1{
+    transform: rotate(293deg)!important;
+    top: 65px;
+    left: 100px;
+}
+.slider-v-r2{
+    transform: rotate(0deg)!important;
+    top: 62px;
+    left: 110px;
+}
+.slider-v-r3{
+    transform: rotate(73deg)!important;
+    top: 67px;
+    left: 119px;
+}
+
+/* ! sliders.forWaveForms */
+.for-waveforms::-webkit-slider-thumb{
+    height: 5px!important;
+    width: 5px!important;
+}
